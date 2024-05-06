@@ -216,17 +216,37 @@ const MembershipApplication = () => {
             {/* date of birth */}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Date of Birth</p>
-              <div className="relative">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={["DateField", "DateField"]}>
-                    <DateField
-                      value={null}
-                      onChange={(e) =>
-                        handleInputChange(e, "selectedDate", setProfileInfo)
+              <div
+                className="relative"
+                onClick={() => setShowCalendar((prevState) => !prevState)}
+              >
+                <input
+                  type="text"
+                  readOnly
+                  value={inputPlaceholder}
+                  className="w-full h-[56px] border border-black py-2 px-[12px] w-full"
+                />
+                <button
+                  // onClick={() => setShowCalendar((prevState) => !prevState)}
+                  className="absolute right-0 top-0 h-full px-3 flex items-center"
+                >
+                  <img src={calendarIcon} alt="" />
+                </button>
+                {showCalendar && (
+                  <div className="w-full md:w-[45%] absolute right-0 mt-2 p-2 bg-white border border-black rounded-none">
+                    <Calendar
+                      onChange={(date) =>
+                        setProfileInfo((prevState) => ({
+                          ...prevState,
+                          selectedDate: date,
+                        }))
                       }
+                      value={profileInfo.selectedDate} // Add this line
+                      className="border-none"
+                      maxDate={new Date()}
                     />
-                  </DemoContainer>
-                </LocalizationProvider>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -260,6 +280,7 @@ const MembershipApplication = () => {
             </div>
           </div>
         )}
+
         {step === 2 && (
           <div
             className={`step flex flex-col gap-4 ${
@@ -307,6 +328,7 @@ const MembershipApplication = () => {
             </div>
           </div>
         )}
+
         {step === 3 && (
           <div
             className={`step flex flex-col gap-4 ${
@@ -404,6 +426,7 @@ const MembershipApplication = () => {
             </div>
           </div>
         )}
+
         <div>
           <button
             onClick={handlePrev}

@@ -86,12 +86,12 @@ const Menu = () => {
           >
             Co-working
           </p>
-          {/* <p
+          <p
             className="font-bold text-[18px] lg:text-[24px] cursor-pointer hover:text-[#FF3131]"
             onClick={() => navigate(`/membership`)}
           >
             Membership
-          </p> */}
+          </p>
           <div className="flex gap-0 items-start justify-start lg:items-center">
             <a
               href="https://www.16by16.co/home/reservations "

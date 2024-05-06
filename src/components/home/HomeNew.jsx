@@ -107,7 +107,7 @@ const HomeNew = () => {
 
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
-      <div className="w-full fixed lg:sticky top-0 lg:top-[50px] flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
+      <div className="w-full fixed top-0 lg:top-[50px] flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
         <Link to="/menu">
           <button className="font-normal text-[18px] lg:text-[24px]">
@@ -115,16 +115,8 @@ const HomeNew = () => {
           </button>
         </Link>
       </div>
-      {/* <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
-        <Link to="/menu">
-          <button className="font-normal text-[18px] lg:text-[24px]">
-            Menu
-          </button>
-        </Link>
-      </div> */}
       <HomeLanding />
-      {/* <div
+      <div
         className="h-[66px] w-full bg-[#0a0a0a] fixed bottom-0 lg:top-0 z-50 flex justify-between lg:justify-center lg:gap-[80px] items-center px-[24px] lg:px-[96px] cursor-pointer"
         onClick={() => navigate(`/menu`)}
       >
@@ -132,19 +124,9 @@ const HomeNew = () => {
           Memberships open
         </p>
         <p className="font-bold text-[18px] lg:text-[24px] text-white">Apply</p>
-      </div> */}
+      </div>
 
-      {/* <div className="bg-white sticky justify-center w-full top-4 lg:top-[90px] pt-[10px] lg:pt-[5px] px-[24px] lg:px-[96px]">
-        <div className="w-full flex justify-between items-center mt-[40px]">
-          <p className="font-bold text-[18px] lg:text-[24px]">Calendar</p>
-          <p className="font-normal text-[18px] lg:text-[24px]">
-            {currentTitle}
-          </p>
-        </div>
-        <hr className="mt-[20px] opacity-30" />
-      </div> */}
-
-      <div className="bg-white sticky justify-center w-full top-4 lg:top-[40px] pt-[10px] lg:pt-[5px] px-[24px] lg:px-[96px]">
+      <div className="bg-white sticky justify-center w-full top-4 lg:top-[90px] pt-[10px] lg:pt-[5px] px-[24px] lg:px-[96px]">
         <div className="w-full flex justify-between items-center mt-[40px]">
           <p className="font-bold text-[18px] lg:text-[24px]">Calendar</p>
           <p className="font-normal text-[18px] lg:text-[24px]">
@@ -248,14 +230,3 @@ const MONTHS = [
 ];
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-{
-  /* <div className="w-full fixed lg:sticky top-0 lg:top-[50px] flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
-        <Link to="/menu">
-          <button className="font-normal text-[18px] lg:text-[24px]">
-            Menu
-          </button>
-        </Link>
-      </div> */
-}
