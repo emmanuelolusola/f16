@@ -1,0 +1,188 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.link-no-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input.react-dropdown-select-input::placeholder {
+  font-size: 18px;
+}
+
+div.react-dropdown-select {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+span.react-dropdown-select-item {
+  border-bottom: 1px solid black;
+  padding: 12px;
+}
+
+span.react-dropdown-select-item:last-child {
+  border-bottom: none;
+}
+
+div.react-dropdown-select-dropdown {
+  border: 1px solid black;
+}
+
+span.react-dropdown-select-option {
+  background: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+span.react-dropdown-select-option-label {
+  color: black;
+}
+
+span.react-dropdown-select-option-remove {
+  color: black;
+}
+
+div.react-dropdown-select-content {
+  overflow-y: scroll;
+}
+
+span.react-calendar__navigation__label__labelText {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+button.react-calendar__tile {
+  color: #0a0a0a;
+  font-size: 18px;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.animate-arrow {
+  animation: fade-in-animation 500ms forwards;
+}
+
+@keyframes fade-in-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-alert {
+  animation: slide-in-animation 5.9s forwards;
+}
+
+@keyframes slide-in-animation {
+  0% {
+    top: -100%;
+  }
+  10% {
+    top: 0;
+  }
+  70% {
+    top: 0;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 70vh;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Define keyframes for slide-in animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Define keyframes for slide-out animation */
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Apply keyframes to elements with the 'slide-in' class */
+.slide-in {
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Apply keyframes to elements with the 'slide-out' class */
+.slide-out {
+  animation: slideOut 0.3s ease forwards;
+}

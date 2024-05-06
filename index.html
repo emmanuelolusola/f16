@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/friends-of-16/src/assets/react.svg" /> -->
+    <link rel="icon" type="image/svg" href="Logo.svg" sizes="16x16" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 user-scalable=no"
+    />
+    <meta
+      name="keywords"
+      content="friends of 16, 16 by 16, 16/16, Lagos, Creatives, Creative spaces in Lagos"
+    />
+    <title>Friends of 16</title>
+    <meta name="title" content="Friends of 16" />
+    <meta
+      name="description"
+      content="16/16 is a serene space for intimate experiences designed to attract and serve creatives"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://friends.16by16.co/" />
+    <meta property="og:title" content="Friends of 16" />
+    <meta
+      property="og:description"
+      content="16/16 is a serene space for intimate experiences designed to attract and serve creatives"
+    />
+    <meta
+      property="og:image"
+      content="https://friends.16by16.co/SEOImage.png"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://friends.16by16.co/" />
+    <meta property="twitter:title" content="Friends of 16" />
+    <meta
+      property="twitter:description"
+      content="16/16 is a serene space for intimate experiences designed to attract and serve creatives"
+    />
+    <meta
+      property="twitter:image"
+      content="https://friends.16by16.co/SEOImage.png"
+    />
+
+    <script
+      defer
+      data-domain="friends.16by16.co"
+      src="https://plausible.io/js/script.js"
+    ></script>
+  </head>
+  <script>
+    (function (m, a, z, e) {
+      var s, t;
+      try {
+        t = m.sessionStorage.getItem("maze-us");
+      } catch (err) {}
+
+      if (!t) {
+        t = new Date().getTime();
+        try {
+          m.sessionStorage.setItem("maze-us", t);
+        } catch (err) {}
+      }
+
+      s = a.createElement("script");
+      s.src = z + "?t=" + t + "&apiKey=" + e;
+      s.async = true;
+      a.getElementsByTagName("head")[0].appendChild(s);
+      m.mazeUniversalSnippetApiKey = e;
+    })(
+      window,
+      document,
+      "https://snippet.maze.co/maze-universal-loader.js",
+      "8f114088-df77-4787-b10a-c4d4747cd987"
+    );
+  </script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
