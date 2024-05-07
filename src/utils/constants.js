@@ -499,4 +499,5 @@ export const EMERGENCY = [
   "Mother",
   "Friend",
   "Child",
+  "Other",
 ];
