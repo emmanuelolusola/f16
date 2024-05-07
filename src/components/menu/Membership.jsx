@@ -73,7 +73,7 @@ const Membership = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-8 px-[24px] lg:w-[600px] lg:mx-auto lg:px-0 py-[50px] lg:py-[50px]">
+      <div className="flex flex-col gap-8 px-[24px] lg:w-[600px] lg:mx-auto lg:px-0 py-[40px] lg:py-[50px]">
         <p className="font-normal text-[18px] lg:text-[24px]">
           Over the years, I’ve built strong friendships and working
           relationships with some of Nigeria's most celebrated brands, artists
