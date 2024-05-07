@@ -301,7 +301,6 @@ const MembershipApplication = () => {
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Nationality</p>
               <Select
-                autoFocus
                 placeholder="Select Nationality"
                 options={NATIONALITIES.map((nationality) => ({
                   value: nationality,

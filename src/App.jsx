@@ -12,6 +12,7 @@ import BookedCoworking from "./components/menu/BookedCoworking";
 import Membership from "./components/menu/Membership";
 import MembershipApplication from "./components/menu/MembershipApplication";
 import ApplicationReceived from "./components/menu/ApplicationReceived";
+import MembershipAbout from "./components/menu/MembershipAbout";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             path="/membership/application"
             element={<MembershipApplication />}
           />
+          <Route path="/membership/about" element={<MembershipAbout />} />
           <Route
             path="/membership/application/received"
             element={<ApplicationReceived />}
