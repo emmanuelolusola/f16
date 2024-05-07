@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { SLIDESHOW } from "../../utils/constants";
 
 import arrow from "../../assets/chevron-down.svg";
+import img from "../../assets/img1.png";
 
 const Membership = () => {
   const navigate = useNavigate();
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [shuffledImages, setShuffledImages] = useState([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === shuffledImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [shuffledImages]);
-
-  useEffect(() => {
-    function shuffleArray(array) {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      return shuffled;
-    }
-
-    const shuffled = shuffleArray(SLIDESHOW);
-    setShuffledImages(shuffled);
-  }, []);
 
   const scrollToTop = () => {
     window.scroll(0, 0);
@@ -64,15 +37,8 @@ const Membership = () => {
         <div className="mt-[50px] lg:mt-[70px] border border-b-black opacity-[10%]"></div>
       </div>
       <div className="w-full px-[24px] lg:w-[600px] lg:mx-auto lg:px-0 py-[20px] flex flex-col gap-8 lg:gap-8">
-        <div className="slideshow lg:h-[80vh]">
-          {shuffledImages.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Slide ${index}`}
-              className={`slide ${index === currentIndex ? "active" : ""}`}
-            />
-          ))}
+        <div className="w-full h-[70vh] lg:h-[80vh] overflow-hidden">
+          <img src={img} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="w-full flex justify-center items-center">
           <img src={arrow} alt="" width={30} />
@@ -111,15 +77,6 @@ const Membership = () => {
         </div>
         <div className="flex flex-col gap-4">
           <div
-            className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold flex justify-center items-center"
-            onClick={() => {
-              navigate(`/about`);
-              scrollToTop();
-            }}
-          >
-            Learn more about the program
-          </div>
-          <div
             className="w-full h-[66px] bg-[#0a0a0a] text-white text-[18px] lg:text-[24px] font-bold flex justify-center items-center"
             onClick={() => {
               navigate(`/membership/application`);
@@ -127,6 +84,15 @@ const Membership = () => {
             }}
           >
             Apply for membership
+          </div>
+          <div
+            className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold flex justify-center items-center"
+            onClick={() => {
+              navigate(`/about`);
+              scrollToTop();
+            }}
+          >
+            Learn more about the program
           </div>
         </div>
       </div>
