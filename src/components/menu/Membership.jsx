@@ -37,7 +37,7 @@ const Membership = () => {
         <div className="mt-[50px] lg:mt-[70px] border border-b-black opacity-[10%]"></div>
       </div>
       <div className="w-full px-[24px] lg:w-[600px] lg:mx-auto lg:px-0 py-[20px] flex flex-col gap-8 lg:gap-8">
-        <div className="w-full h-[70vh] lg:h-[80vh] overflow-hidden">
+        <div className="w-full h-[66vh] lg:h-[80vh] overflow-hidden">
           <img src={img} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="w-full flex justify-center items-center">
