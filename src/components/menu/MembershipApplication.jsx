@@ -59,7 +59,10 @@ const MembershipApplication = () => {
   };
 
   const handleChange = (date) => {
-    setSelectedDate(date);
+    setProfileInfo((prevState) => ({
+      ...prevState,
+      selectedDate: date,
+    }));
     setShowCalendar(false);
   };
 
@@ -130,7 +133,12 @@ const MembershipApplication = () => {
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
+        <p
+          className="font-bold text-[18px] lg:text-[24px]"
+          onClick={() => navigate(`/`)}
+        >
+          16/16
+        </p>
         <p
           className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
           onClick={() => navigate(`/menu`)}
@@ -172,6 +180,7 @@ const MembershipApplication = () => {
               <input
                 type="text"
                 id="first_name"
+                autoFocus
                 value={profileInfo.firstName}
                 onChange={(e) =>
                   handleInputChange(e, "firstName", setProfileInfo)
@@ -216,32 +225,26 @@ const MembershipApplication = () => {
             {/* date of birth */}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Date of Birth</p>
-              <div
-                className="relative"
-                onClick={() => setShowCalendar((prevState) => !prevState)}
-              >
+              <div className="relative">
                 <input
                   type="text"
                   readOnly
                   value={inputPlaceholder}
                   className="w-full h-[56px] border border-black py-2 px-[12px] w-full"
+                  onClick={() => setShowCalendar((prevState) => !prevState)}
                 />
-                <button
-                  // onClick={() => setShowCalendar((prevState) => !prevState)}
-                  className="absolute right-0 top-0 h-full px-3 flex items-center"
-                >
-                  <img src={calendarIcon} alt="" />
+                <button className="absolute right-0 top-0 h-full px-3 flex items-center">
+                  <img
+                    src={calendarIcon}
+                    alt=""
+                    onClick={() => setShowCalendar((prevState) => !prevState)}
+                  />
                 </button>
                 {showCalendar && (
                   <div className="w-full md:w-[45%] absolute right-0 mt-2 p-2 bg-white border border-black rounded-none">
                     <Calendar
-                      onChange={(date) =>
-                        setProfileInfo((prevState) => ({
-                          ...prevState,
-                          selectedDate: date,
-                        }))
-                      }
-                      value={profileInfo.selectedDate} // Add this line
+                      onChange={handleChange}
+                      value={profileInfo.selectedDate}
                       className="border-none"
                       maxDate={new Date()}
                     />
@@ -265,13 +268,12 @@ const MembershipApplication = () => {
             </div>
             {/* company */}
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">
-                Company Name (if applicable)
-              </p>
+              <p className="text-[18px] font-normal">Company Name</p>
               <input
                 type="text"
                 id="company"
                 value={profileInfo.company}
+                placeholder="Optional"
                 onChange={(e) =>
                   handleInputChange(e, "company", setProfileInfo)
                 }

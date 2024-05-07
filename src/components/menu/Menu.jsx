@@ -42,7 +42,12 @@ const Menu = () => {
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
-          <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
+          <p
+            className="font-bold text-[18px] lg:text-[24px]"
+            onClick={() => navigate(`/`)}
+          >
+            16/16
+          </p>
           <button
             className="font-normal text-[18px] lg:text-[24px]"
             onClick={() => navigate(-1)}

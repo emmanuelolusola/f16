@@ -137,7 +137,7 @@ button.react-calendar__tile {
   height: auto;
   position: absolute;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 0s ease;
 }
 
 .slide.active {
