@@ -1,17 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PRONOUNS } from "../../utils/constants";
+import { COUNTRIES } from "../../utils/constants";
+import { NATIONALITIES } from "../../utils/constants";
+import { EMERGENCY } from "../../utils/constants";
 import Select from "react-dropdown-select";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { format } from "date-fns";
 import { membershipApplication } from "../../queries/auth";
-
-import dayjs from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateField } from "@mui/x-date-pickers/DateField";
 
 import calendarIcon from "../../assets/Vector.svg";
 
@@ -303,14 +300,28 @@ const MembershipApplication = () => {
             {/* nationality */}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Nationality</p>
-              <input
-                type="text"
-                id="nationality"
-                value={addressInfo.nationality}
-                onChange={(e) =>
-                  handleInputChange(e, "nationality", setAddressInfo)
+              <Select
+                autoFocus
+                placeholder="Select Nationality"
+                options={NATIONALITIES.map((nationality) => ({
+                  value: nationality,
+                  label: nationality,
+                }))}
+                onChange={(selectedOption) =>
+                  setAddressInfo((prevState) => ({
+                    ...prevState,
+                    nationality:
+                      selectedOption && selectedOption[0]
+                        ? selectedOption[0].value
+                        : "",
+                  }))
                 }
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                value={{
+                  value: addressInfo.nationality,
+                  label: addressInfo.nationality,
+                }}
+                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
+                color="black"
               />
             </div>
             {/* address */}
@@ -329,14 +340,27 @@ const MembershipApplication = () => {
             <div className="w-full flex flex-col gap-0">
               {/* country */}
               <p className="text-[18px] font-normal">Country</p>
-              <input
-                type="text"
-                id="country"
-                value={addressInfo.country}
-                onChange={(e) =>
-                  handleInputChange(e, "country", setAddressInfo)
+              <Select
+                placeholder="Select Country"
+                options={COUNTRIES.map((country) => ({
+                  value: country.name,
+                  label: country.name,
+                }))}
+                onChange={(selectedOption) =>
+                  setAddressInfo((prevState) => ({
+                    ...prevState,
+                    country:
+                      selectedOption && selectedOption[0]
+                        ? selectedOption[0].value
+                        : "",
+                  }))
                 }
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                value={{
+                  value: addressInfo.country,
+                  label: addressInfo.country,
+                }}
+                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
+                color="black"
               />
             </div>
           </div>
@@ -354,6 +378,7 @@ const MembershipApplication = () => {
               <input
                 type="tel"
                 id="phone"
+                autoFocus
                 value={contactInfo.phone}
                 onChange={(e) => handleInputChange(e, "phone", setContactInfo)}
                 className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
@@ -381,9 +406,10 @@ const MembershipApplication = () => {
                 className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
               />
             </div>
+            <p className="text-[18px] font-normal">Emergency Contact:</p>
             {/* emergency contact name */}
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Emergency Contact Name</p>
+              <p className="text-[18px] font-normal">Name</p>
               <input
                 type="text"
                 id="emergency_contact_name"
@@ -396,24 +422,30 @@ const MembershipApplication = () => {
             </div>
             {/* emergency contact relationship */}
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">
-                Emergency Contact Relationship
-              </p>
-              <input
-                type="text"
-                id="emergency_contact_relationship"
-                value={contactInfo.emergencyRelationship}
-                onChange={(e) =>
-                  handleInputChange(e, "emergencyRelationship", setContactInfo)
+              <p className="text-[18px] font-normal">Relationship</p>
+              <Select
+                placeholder="Select pronoun"
+                options={EMERGENCY.map((emergency) => ({
+                  value: emergency,
+                  label: emergency,
+                }))}
+                onChange={(values) =>
+                  setContactInfo((prevState) => ({
+                    ...prevState,
+                    emergencyRelationship: values[0].value,
+                  }))
                 }
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                value={contactInfo.emergencyRelationship}
+                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
+                color="black"
+                contentRenderer={() => (
+                  <div>{contactInfo.emergencyRelationship}</div>
+                )}
               />
             </div>
             {/* emergency contact phone number */}
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">
-                Emergency Contact Phone Number
-              </p>
+              <p className="text-[18px] font-normal">Phone Number</p>
               <input
                 type="text"
                 id="emergency_contact_phone_number"
@@ -441,17 +473,6 @@ const MembershipApplication = () => {
         )}
 
         <div>
-          <button
-            onClick={handlePrev}
-            disabled={step === 1}
-            className={`w-full h-[66px] text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold mb-[10px] ${
-              step === 1
-                ? "border border-[#e1e1e1] text-[#e1e1e1]"
-                : "border border-[#0a0a0a]"
-            }`}
-          >
-            Previous
-          </button>
           {step === 3 ? (
             <div className="">
               {loading ? (
@@ -480,6 +501,17 @@ const MembershipApplication = () => {
               Next
             </button>
           )}
+          <button
+            onClick={handlePrev}
+            disabled={step === 1}
+            className={`w-full h-[66px] text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold mb-[10px] ${
+              step === 1
+                ? "border border-[#e1e1e1] text-[#e1e1e1]"
+                : "border border-[#0a0a0a]"
+            }`}
+          >
+            Previous
+          </button>
         </div>
       </div>
     </div>
