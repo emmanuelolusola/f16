@@ -130,18 +130,29 @@ const MembershipApplication = () => {
       error;
     }
   };
+
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
           className="font-bold text-[18px] lg:text-[24px]"
-          onClick={() => navigate(`/`)}
+          onClick={() => {
+            navigate(`/`);
+            scrollToTop();
+          }}
         >
           16/16
         </p>
         <p
           className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
-          onClick={() => navigate(`/menu`)}
+          onClick={() => {
+            navigate(`/menu`);
+            scrollToTop();
+          }}
         >
           Menu
         </p>

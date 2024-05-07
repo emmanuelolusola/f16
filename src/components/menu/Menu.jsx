@@ -38,19 +38,29 @@ const Menu = () => {
     window.open(emailUrl, "_blank");
   };
 
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
             className="font-bold text-[18px] lg:text-[24px]"
-            onClick={() => navigate(`/`)}
+            onClick={() => {
+              navigate(`/`);
+              scrollToTop();
+            }}
           >
             16/16
           </p>
           <button
             className="font-normal text-[18px] lg:text-[24px]"
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(-1);
+              scrollToTop();
+            }}
           >
             Close
           </button>
@@ -75,25 +85,37 @@ const Menu = () => {
         <div className="flex flex-col gap-[24px] lg:items-end">
           <p
             className="font-bold text-[18px] lg:text-[24px] hover:text-[#FF3131] cursor-pointer"
-            onClick={() => navigate(`/`)}
+            onClick={() => {
+              navigate(`/`);
+              scrollToTop();
+            }}
           >
             Home
           </p>
           <p
             className="font-bold text-[18px] lg:text-[24px] hover:text-[#FF3131] cursor-pointer"
-            onClick={() => navigate(`/about`)}
+            onClick={() => {
+              navigate(`/about`);
+              scrollToTop();
+            }}
           >
             About 16/16
           </p>
           <p
             className="font-bold text-[18px] lg:text-[24px] cursor-pointer hover:text-[#FF3131]"
-            onClick={() => navigate(`/co-working`)}
+            onClick={() => {
+              navigate(`/co-working`);
+              scrollToTop();
+            }}
           >
             Co-working
           </p>
           <p
             className="font-bold text-[18px] lg:text-[24px] cursor-pointer hover:text-[#FF3131]"
-            onClick={() => navigate(`/membership`)}
+            onClick={() => {
+              navigate(`/membership`);
+              scrollToTop();
+            }}
           >
             Membership
           </p>

@@ -105,12 +105,19 @@ const HomeNew = () => {
     return aStartDate - bStartDate;
   });
 
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 lg:top-[50px] flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
           className="font-bold text-[18px] lg:text-[24px]"
-          onClick={() => navigate(`/`)}
+          onClick={() => {
+            navigate(`/`);
+            scrollToTop();
+          }}
         >
           16/16
         </p>
@@ -123,7 +130,10 @@ const HomeNew = () => {
       <HomeLanding />
       <div
         className="h-[66px] w-full bg-[#0a0a0a] fixed bottom-0 lg:top-0 z-50 flex justify-between items-center px-[24px] lg:px-[96px] cursor-pointer"
-        onClick={() => navigate(`/membership`)}
+        onClick={() => {
+          navigate(`/membership`);
+          scrollToTop();
+        }}
       >
         <p className="font-normal text-[18px] lg:text-[24px] text-white">
           Memberships open
