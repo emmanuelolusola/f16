@@ -55,12 +55,25 @@ const MembershipApplication = () => {
     }
   };
 
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
   const handleChange = (date) => {
     setProfileInfo((prevState) => ({
       ...prevState,
       selectedDate: date,
     }));
     setShowCalendar(false);
+  };
+
+  const handleEmailChange = (e) => {
+    const inputValue = e.target.value;
+    setContactInfo((prevState) => ({
+      ...prevState,
+      email: inputValue,
+    }));
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsEmailValid(emailRegex.test(inputValue));
   };
 
   const handleInputChange = (e, key, setState) => {
@@ -390,10 +403,19 @@ const MembershipApplication = () => {
                 type="email"
                 id="email"
                 value={contactInfo.email}
-                onChange={(e) => handleInputChange(e, "email", setContactInfo)}
+                onChange={(e) => {
+                  handleEmailChange(e);
+                  handleInputChange(e, "email", setContactInfo);
+                }}
                 className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
               />
+              {isEmailValid === false && (
+                <p className="text-[18px] font-normal text-red-500">
+                  Please enter a valid email address.
+                </p>
+              )}
             </div>
+
             {/* social link */}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Social Link</p>
@@ -481,6 +503,14 @@ const MembershipApplication = () => {
                   className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 >
                   Please wait
+                </button>
+              ) : !isEmailValid ? (
+                <button
+                  onClick={handleSubmit}
+                  disabled
+                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                >
+                  Submit
                 </button>
               ) : (
                 <button
