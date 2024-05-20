@@ -4,11 +4,9 @@ import { login } from "../../queries/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-
   const [isEmailValid, setIsEmailValid] = useState(false);
-
   const [loading, setLoading] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -17,22 +15,19 @@ const Login = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsEmailValid(emailRegex.test(inputValue));
+    setErrorMessage("");
   };
 
   const handleButtonClick = async () => {
-    const data = {
-      email: email,
-    };
+    const data = { email };
     try {
       setLoading(true);
-      const res = await login(data);
-      console.log(res);
+      await login(data);
       setLoading(false);
-
       navigate(`/login-sent?email=${email}`);
     } catch (error) {
       setLoading(false);
-      error;
+      setErrorMessage("Account not found");
     }
   };
 
@@ -45,7 +40,7 @@ const Login = () => {
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px]"
+            className="font-bold text-[18px] lg:text-[24px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -82,12 +77,16 @@ const Login = () => {
               onChange={handleEmailChange}
               className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px]"
             />
+            {errorMessage && (
+              <p className="text-red-500 text-[18px] lg:text-[24px]">
+                {errorMessage}
+              </p>
+            )}
           </div>
           {loading ? (
             <button
               disabled
               className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
-              onClick={handleButtonClick}
             >
               Please wait
             </button>
@@ -101,7 +100,10 @@ const Login = () => {
             </button>
           )}
         </div>
-        <div className="w-full" onClick={() => navigate(`/membership`)}>
+        <div
+          className="w-full cursor-pointer"
+          onClick={() => navigate(`/membership`)}
+        >
           <p className="text-[18px] lg:text-[24px] font-normal text-center">
             Apply for membership
           </p>

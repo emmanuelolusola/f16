@@ -53,6 +53,6 @@ export const login = async (body) => {
     const { data } = await instance.post("/accounts/login", body);
     return data;
   } catch (err) {
-    console.log(err.response.data.message);
+    throw new Error(err.response.data.message);
   }
 };

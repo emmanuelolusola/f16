@@ -1,12 +1,21 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginSent = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Extract email from URL parameters
+  const queryParams = new URLSearchParams(location.search);
+  const email = queryParams.get("email");
+
+  // Create mailto link
+  const mailtoLink = `mailto:${email}`;
 
   const scrollToTop = () => {
     window.scroll(0, 0);
   };
+
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
@@ -40,14 +49,16 @@ const LoginSent = () => {
           </p>
           <div className="w-full flex flex-col gap-0">
             <p className="text-[18px] lg:text-[24px] font-normal">
-              Your profile login link has been sent to your email
+              Your profile login link has been sent to {email}
             </p>
           </div>
-          <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]">
-            Open Mail
-          </button>
+          <a href={mailtoLink} className="link-no-highlight w-full">
+            <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
+              Open Mail
+            </button>
+          </a>
         </div>
-        <div className="w-full" onClick={() => navigate(`/`)}>
+        <div className="w-full cursor-pointer" onClick={() => navigate(`/`)}>
           <p className="text-[18px] lg:text-[24px] font-normal text-center">
             Close
           </p>
