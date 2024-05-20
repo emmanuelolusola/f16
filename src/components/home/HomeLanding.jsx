@@ -9,7 +9,7 @@ const HomeLanding = () => {
   const navigate = useNavigate();
   const scrollToEvent = () => {
     window.scrollTo({
-      top: 670,
+      top: 660,
       left: 0,
       behavior: "smooth",
     });

@@ -69,8 +69,8 @@ const Menu = () => {
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
       <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
-        <div className="lg:w-[800px] flex flex-col gap-4">
-          <a
+        <div className="lg:w-[400px] flex flex-col gap-4">
+          {/* <a
             href="https://maps.app.goo.gl/EdXswCyELe3quRJS6?g_st=ic"
             target="_blank"
             rel="noreferrer"
@@ -80,7 +80,13 @@ const Menu = () => {
             <p className="font-normal text-[18px] lg:text-[24px]">
               16 Kofo Abayomi
             </p>
-          </a>
+          </a> */}
+          <button
+            className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold border border-black text-black"
+            onClick={() => navigate(`/login`)}
+          >
+            Login
+          </button>
         </div>
         <div className="flex flex-col gap-[24px] lg:items-end">
           <p

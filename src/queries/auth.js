@@ -47,3 +47,12 @@ export const membershipApplication = async (body) => {
     console.log(err.response.data.message);
   }
 };
+
+export const login = async (body) => {
+  try {
+    const { data } = await instance.post("/accounts/login", body);
+    return data;
+  } catch (err) {
+    console.log(err.response.data.message);
+  }
+};

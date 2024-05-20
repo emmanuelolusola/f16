@@ -13,6 +13,8 @@ import Membership from "./components/menu/Membership";
 import MembershipApplication from "./components/menu/MembershipApplication";
 import ApplicationReceived from "./components/menu/ApplicationReceived";
 import MembershipAbout from "./components/menu/MembershipAbout";
+import Login from "./components/auth/Login";
+import LoginSent from "./components/auth/LoginSent";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/event/:id" element={<Event />} />
           <Route path="/event/:id/registered" element={<Registered />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login-sent" element={<LoginSent />} />
         </Routes>
       </Router>
     </>
