@@ -15,6 +15,8 @@ import ApplicationReceived from "./components/menu/ApplicationReceived";
 import MembershipAbout from "./components/menu/MembershipAbout";
 import Login from "./components/auth/Login";
 import LoginSent from "./components/auth/LoginSent";
+import MenuProfile from "./components/auth/MenuProfile";
+import Payment from "./components/auth/Payment";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path="/event/:id/registered" element={<Registered />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login-sent" element={<LoginSent />} />
+          <Route path="/profile/menu" element={<MenuProfile />} />
+          <Route path="/profile/payment" element={<Payment />} />
         </Routes>
       </Router>
     </>

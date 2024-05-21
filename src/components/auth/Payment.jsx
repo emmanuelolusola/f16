@@ -1,20 +1,10 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import arrow from "../../assets/arrow_forward_ios.svg";
+import { PAYMENT } from "../../utils/constants";
 
-const LoginSent = () => {
+const Payment = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Extract email from URL parameters
-  const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get("email");
-
-  // Create mailto link
-  const mailtoLink = `mailto:${email}`;
-
-  const scrollToTop = () => {
-    window.scroll(0, 0);
-  };
 
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
@@ -45,25 +35,36 @@ const LoginSent = () => {
       <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between">
         <div className="w-full flex flex-col gap-4">
           <p className="font-bold text-[18px] lg:text-[24px]">
-            Login link sent
+            Welcome, Opemipo
           </p>
           <div className="w-full flex flex-col gap-0">
             <p className="text-[18px] lg:text-[24px] font-normal">
-              Your profile login link has been sent to {email}
+              Choose a payment option to activate your Friends of 16 membership.
             </p>
           </div>
-          <a href={mailtoLink} className="link-no-highlight w-full">
-            <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
-              Open Mail
-            </button>
-          </a>
+          {PAYMENT.map((option) => (
+            <div
+              key={option.id}
+              className="w-full flex justify-between items-center  border border-[#e0e0e0] py-4 px-4"
+            >
+              <div className="flex flex-col">
+                <p className="font-bold text-[18px] lg:text-[24px]">
+                  Pay {option.amount}
+                </p>
+                <p className="text-[18px] lg:text-[24px] font-normal">
+                  For {option.period}
+                </p>
+              </div>
+              <img src={arrow} alt="" />
+            </div>
+          ))}
         </div>
         <div
           className="w-full cursor-pointer"
-          onClick={() => navigate(`/profile/payment`)}
+          onClick={() => navigate(`/profile/menu`)}
         >
-          <p className="text-[18px] lg:text-[24px] font-normal text-center">
-            My Profile
+          <p className="text-[18px] lg:text-[24px] font-normal text-center underline underline-offset-2">
+            I'll do this later
           </p>
         </div>
       </div>
@@ -71,4 +72,4 @@ const LoginSent = () => {
   );
 };
 
-export default LoginSent;
+export default Payment;

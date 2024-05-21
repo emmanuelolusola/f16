@@ -61,7 +61,7 @@ const Login = () => {
         <hr className="mt-[20px] opacity-30" />
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
-      <div className="w-full h-[80vh] px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between">
+      <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between">
         <div className="w-full flex flex-col gap-4">
           <p className="font-bold text-[18px] lg:text-[24px]">
             Login to Friends of 16
@@ -73,6 +73,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
+              autoFocus
               value={email}
               onChange={handleEmailChange}
               className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px]"
@@ -94,7 +95,8 @@ const Login = () => {
             <button
               disabled={!isEmailValid}
               className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
-              onClick={handleButtonClick}
+              // onClick={handleButtonClick}
+              onClick={() => navigate(`/login-sent?email=${email}`)}
             >
               Send Login Link
             </button>
@@ -104,7 +106,7 @@ const Login = () => {
           className="w-full cursor-pointer"
           onClick={() => navigate(`/membership`)}
         >
-          <p className="text-[18px] lg:text-[24px] font-normal text-center">
+          <p className="text-[18px] lg:text-[24px] font-normal text-center underline underline-offset-2">
             Apply for membership
           </p>
         </div>

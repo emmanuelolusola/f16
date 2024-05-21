@@ -17,6 +17,19 @@ export const COWORKING = [
   },
 ];
 
+export const PAYMENT = [
+  {
+    id: 1,
+    amount: "$150",
+    period: "6 months",
+  },
+  {
+    id: 2,
+    amount: "$250",
+    period: "one year",
+  },
+];
+
 export const PRONOUNS = ["He/Him", "She/Her", "They/Them"];
 
 export const SLIDESHOW = [img1, img2, img3, img4, img5, img6, img7];
