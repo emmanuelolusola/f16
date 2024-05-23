@@ -17,6 +17,8 @@ import Login from "./components/auth/Login";
 import LoginSent from "./components/auth/LoginSent";
 import MenuProfile from "./components/auth/MenuProfile";
 import Payment from "./components/auth/Payment";
+import PaymentConfirm from "./components/auth/PaymentConfirm";
+import Profile from "./components/auth/Profile";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
           <Route path="/login-sent" element={<LoginSent />} />
           <Route path="/profile/menu" element={<MenuProfile />} />
           <Route path="/profile/payment" element={<Payment />} />
+          <Route path="/profile/payment/confirm" element={<PaymentConfirm />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </>

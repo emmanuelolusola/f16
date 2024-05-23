@@ -45,7 +45,10 @@ const Payment = () => {
           {PAYMENT.map((option) => (
             <div
               key={option.id}
-              className="w-full flex justify-between items-center  border border-[#e0e0e0] py-4 px-4"
+              className="w-full flex justify-between items-center border border-[#e0e0e0] py-4 px-4"
+              onClick={() =>
+                navigate(`/profile/payment/confirm`, { state: option })
+              }
             >
               <div className="flex flex-col">
                 <p className="font-bold text-[18px] lg:text-[24px]">
