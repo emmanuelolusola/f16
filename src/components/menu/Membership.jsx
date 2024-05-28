@@ -86,7 +86,7 @@ const Membership = () => {
             Apply for membership
           </div>
           <div
-            className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold flex justify-center items-center"
+            className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold flex justify-center items-center cursor-pointer"
             onClick={() => {
               navigate(`/membership/about`);
               scrollToTop();

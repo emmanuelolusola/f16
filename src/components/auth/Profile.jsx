@@ -47,7 +47,12 @@ const Profile = () => {
                 <p className="font-normal text-[18px] lg:text-[24px]">Active</p>
               </div>
             </div>
-            <p className="font-normal text-[18px] lg:text-[24px]">Edit</p>
+            <p
+              className="font-normal text-[18px] lg:text-[24px]"
+              onClick={() => navigate(`/profile/edit`)}
+            >
+              Edit
+            </p>
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex">
@@ -85,7 +90,10 @@ const Profile = () => {
           </div>
         </div>
         <div className="flex flex-col gap-8 lg:items-end">
-          <div className="flex justify-between items-center">
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => navigate(`/profile/info`)}
+          >
             <p className="font-bold text-[18px] lg:text-[24px]">Profile</p>
             <img src={arrow} alt="" />
           </div>

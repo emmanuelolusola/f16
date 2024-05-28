@@ -34,36 +34,6 @@ export const PRONOUNS = ["He/Him", "She/Her", "They/Them"];
 
 export const SLIDESHOW = [img1, img2, img3, img4, img5, img6, img7];
 
-{
-  /* <input
-                  type="text"
-                  readOnly
-                  value={inputPlaceholder}
-                  className="w-full h-[56px] border border-black py-2 px-[12px] w-full"
-                />
-                <button
-                  onClick={() => setShowCalendar((prevState) => !prevState)}
-                  className="absolute right-0 top-0 h-full px-3 flex items-center"
-                >
-                  <img src={calendarIcon} alt="" />
-                </button>
-                {showCalendar && (
-                  <div className="w-full md:w-[45%] absolute right-0 mt-2 p-2 bg-white border border-black rounded-none">
-                    <Calendar
-                      onChange={(date) =>
-                        setProfileInfo((prevState) => ({
-                          ...prevState,
-                          selectedDate: date,
-                        }))
-                      }
-                      value={profileInfo.selectedDate} // Add this line
-                      className="border-none"
-                      maxDate={new Date()}
-                    />
-                  </div>
-                )} */
-}
-
 export const COUNTRIES = [
   { name: "Afghanistan", code: "AF" },
   { name: "land Islands", code: "AX" },

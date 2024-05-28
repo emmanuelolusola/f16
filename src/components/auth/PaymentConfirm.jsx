@@ -89,10 +89,10 @@ const PaymentConfirm = () => {
               {formattedEndDate}
             </p>
           </div>
-          <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
-            Pay {amount}
-          </button>
         </div>
+        <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
+          Pay {amount}
+        </button>
       </div>
     </div>
   );

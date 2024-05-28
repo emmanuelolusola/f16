@@ -19,6 +19,8 @@ import MenuProfile from "./components/auth/MenuProfile";
 import Payment from "./components/auth/Payment";
 import PaymentConfirm from "./components/auth/PaymentConfirm";
 import Profile from "./components/auth/Profile";
+import ProfileEdit from "./components/auth/ProfileEdit";
+import ProfileInfo from "./components/auth/ProfileInfo";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
           <Route path="/profile/payment" element={<Payment />} />
           <Route path="/profile/payment/confirm" element={<PaymentConfirm />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<ProfileEdit />} />
+          <Route path="/profile/info" element={<ProfileInfo />} />
         </Routes>
       </Router>
     </>
