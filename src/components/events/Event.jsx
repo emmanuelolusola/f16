@@ -161,7 +161,7 @@ const Event = (props) => {
       Email: email,
       Name: name,
       Event: event.Name,
-      Date: event.StartDate,
+      Date: selectedDate,
       Amount: event.Price > 0 ? event.Price : null,
       "Time Slot": event.TimeSlots,
       "Paid with": event.Price > 0 ? "paystack" : null,
@@ -179,7 +179,7 @@ const Event = (props) => {
       navigate(
         `/event/${event.ID}/registered?email=${email}&name=${event.Name}&time=${
           event.TimeSlots
-        }&date=${getDate(event.StartDate)}&address=${event.Address}&imgUrl=${
+        }&date=${selectedDate}&address=${event.Address}&imgUrl=${
           event.Poster[0].url
         }&start=${event.StartDate}&end=${event.EndDate}&type=${"event"}&rsvp=${
           event.RSVP
@@ -187,7 +187,7 @@ const Event = (props) => {
       );
     } catch (error) {
       setLoading(false);
-      error;
+      console.error(error);
     }
   };
 
