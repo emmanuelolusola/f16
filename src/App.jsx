@@ -22,6 +22,7 @@ import Profile from "./components/auth/Profile";
 import ProfileEdit from "./components/auth/ProfileEdit";
 import ProfileInfo from "./components/auth/ProfileInfo";
 import ProfileBookings from "./components/auth/ProfileBookings";
+import ProfilePayment from "./components/auth/ProfilePayment";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/profile/info" element={<ProfileInfo />} />
           <Route path="/profile/bookings" element={<ProfileBookings />} />
+          <Route path="/profile/payments" element={<ProfilePayment />} />
         </Routes>
       </Router>
     </>
