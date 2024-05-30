@@ -21,6 +21,7 @@ import PaymentConfirm from "./components/auth/PaymentConfirm";
 import Profile from "./components/auth/Profile";
 import ProfileEdit from "./components/auth/ProfileEdit";
 import ProfileInfo from "./components/auth/ProfileInfo";
+import ProfileBookings from "./components/auth/ProfileBookings";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/profile/info" element={<ProfileInfo />} />
+          <Route path="/profile/bookings" element={<ProfileBookings />} />
         </Routes>
       </Router>
     </>

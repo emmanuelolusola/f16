@@ -296,3 +296,27 @@ export const EMERGENCY = [
   "Child",
   "Other",
 ];
+
+export const BOOKINGS = [
+  {
+    id: 1,
+    event: "JAM! Lagos",
+    day: "2024-05-31",
+    timeslot: "6pm",
+    address: "16 Kofo Abayomi Street, Flat 16, Victoria Island, Lagos",
+  },
+  {
+    id: 2,
+    event: "PITH Africa Pop Up",
+    day: "2024-07-12",
+    timeslot: "4pm - 6pm",
+    address: "16 Kofo Abayomi Street, Flat 16, Victoria Island, Lagos",
+  },
+  {
+    id: 3,
+    event: "Zero Waste Bar",
+    day: "2024-06-02",
+    timeslot: "7pm - 12am",
+    address: "16 Kofo Abayomi Street, Flat 16, Victoria Island, Lagos",
+  },
+];

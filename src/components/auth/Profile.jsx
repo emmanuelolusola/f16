@@ -99,7 +99,10 @@ const Profile = () => {
             <p className="font-bold text-[18px] lg:text-[24px]">Profile</p>
             <img src={arrow} alt="" />
           </div>
-          <div className="lg:w-[200px] flex justify-between items-center hover:text-[#ff0000]">
+          <div
+            className="lg:w-[200px] flex justify-between items-center hover:text-[#ff0000]"
+            onClick={() => navigate(`/profile/bookings`)}
+          >
             <p className="font-bold text-[18px] lg:text-[24px]">Bookings</p>
             <img src={arrow} alt="" />
           </div>

@@ -66,7 +66,10 @@ const MenuProfile = () => {
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
       <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
-        <div className="lg:w-[400px] flex flex-col gap-4">
+        <div
+          className="lg:w-[400px] flex flex-col gap-4"
+          onClick={() => navigate(`/profile`)}
+        >
           <div className="w-full flex justify-between items-center">
             <div className="flex gap-2">
               <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
@@ -81,12 +84,7 @@ const MenuProfile = () => {
                 </p>
               </div>
             </div>
-            <img
-              src={arrow}
-              alt=""
-              onClick={() => navigate(`/profile`)}
-              className="cursor-pointer"
-            />
+            <img src={arrow} alt="" className="cursor-pointer" />
           </div>
         </div>
         <div className="flex flex-col gap-[24px] lg:items-end">
