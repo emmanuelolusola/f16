@@ -81,7 +81,12 @@ const MenuProfile = () => {
                 </p>
               </div>
             </div>
-            <img src={arrow} alt="" onClick={() => navigate(`/profile`)} />
+            <img
+              src={arrow}
+              alt=""
+              onClick={() => navigate(`/profile`)}
+              className="cursor-pointer"
+            />
           </div>
         </div>
         <div className="flex flex-col gap-[24px] lg:items-end">

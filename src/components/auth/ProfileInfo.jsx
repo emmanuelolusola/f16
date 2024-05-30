@@ -5,18 +5,30 @@ const ProfileInfo = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
-      <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p className="font-bold text-[18px] lg:text-[24px]">16/16</p>
-        <p
-          className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
-          onClick={() => navigate(`/menu`)}
-        >
-          Menu
-        </p>
+      <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
+        <div className="w-full flex justify-between items-center mt-[15px]">
+          <p
+            className="font-bold text-[18px] lg:text-[24px]"
+            onClick={() => {
+              navigate(`/`);
+              scrollToTop();
+            }}
+          >
+            16/16
+          </p>
+          <button
+            className="font-normal text-[18px] lg:text-[24px]"
+            onClick={() => {
+              navigate(-1);
+              scrollToTop();
+            }}
+          >
+            Close
+          </button>
+        </div>
+        <hr className="mt-[20px] opacity-30" />
       </div>
-      <div className="w-full px-[24px] lg:px-[96px]">
-        <div className="mt-[50px] lg:mt-[70px] border border-b-black opacity-[10%]"></div>
-      </div>
+      <div className="h-[60px] lg:h-[100px]"></div>
       <div className="w-full px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col gap-8 pb-10">
         <div className="flex flex-col gap-2 mt-[20px] lg:mt-[50px]">
           <p className="text-[18px] lg:text-[24px] font-bold lg:text-center">

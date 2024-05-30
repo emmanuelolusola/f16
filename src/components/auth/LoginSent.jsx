@@ -52,20 +52,26 @@ const LoginSent = () => {
               Your profile login link has been sent to {email}
             </p>
           </div>
-          <a href={mailtoLink} className="link-no-highlight w-full">
+          {/* <a href={mailtoLink} className="link-no-highlight w-full">
             <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
               Open Mail
             </button>
-          </a>
+          </a> */}
         </div>
-        <div
+        <button
+          className="w-full h-[74px] text-[18px] font-bold bg-black text-white"
+          onClick={() => navigate(`/profile/payment`)}
+        >
+          Open Mail
+        </button>
+        {/* <div
           className="w-full cursor-pointer"
           onClick={() => navigate(`/profile/payment`)}
         >
           <p className="text-[18px] lg:text-[24px] font-normal text-center">
             My Profile
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -76,8 +76,10 @@ const ProfileEdit = () => {
                 <div className="w-[120px] h-[120px] bg-[#D9D9D9] rounded-full"></div>
               </div>
               <div className="w-full flex justify-center gap-8">
-                <p className="text-[18px] lg:text-[24px] font-bold">Upload</p>
-                <p className="text-[18px] lg:text-[24px] text-[#D92D20] font-bold">
+                <p className="text-[18px] lg:text-[24px] font-bold cursor-pointer">
+                  Upload
+                </p>
+                <p className="text-[18px] lg:text-[24px] text-[#D92D20] font-bold cursor-pointer">
                   Remove
                 </p>
               </div>

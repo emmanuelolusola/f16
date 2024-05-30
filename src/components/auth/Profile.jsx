@@ -38,17 +38,19 @@ const Profile = () => {
           <div className="w-full flex justify-between items-start">
             <div className="flex gap-2">
               <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
-                <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#47CD89] rounded-full"></div>
+                <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
               </div>
               <div className="flex flex-col gap-0">
                 <p className="font-bold text-[18px] lg:text-[24px]">
                   Opemipo Aikomo
                 </p>
-                <p className="font-normal text-[18px] lg:text-[24px]">Active</p>
+                <p className="font-normal text-[18px] lg:text-[24px]">
+                  Inactive
+                </p>
               </div>
             </div>
             <p
-              className="font-normal text-[18px] lg:text-[24px]"
+              className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
               onClick={() => navigate(`/profile/edit`)}
             >
               Edit
@@ -91,17 +93,17 @@ const Profile = () => {
         </div>
         <div className="flex flex-col gap-8 lg:items-end">
           <div
-            className="flex justify-between items-center cursor-pointer"
+            className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
             onClick={() => navigate(`/profile/info`)}
           >
             <p className="font-bold text-[18px] lg:text-[24px]">Profile</p>
             <img src={arrow} alt="" />
           </div>
-          <div className="flex justify-between items-center">
+          <div className="lg:w-[200px] flex justify-between items-center hover:text-[#ff0000]">
             <p className="font-bold text-[18px] lg:text-[24px]">Bookings</p>
             <img src={arrow} alt="" />
           </div>
-          <div className="flex justify-between items-center">
+          <div className="lg:w-[200px] flex justify-between items-center hover:text-[#ff0000]">
             <p className="font-bold text-[18px] lg:text-[24px]">Payment</p>
             <img src={arrow} alt="" />
           </div>
