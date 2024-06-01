@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
+
+  const handleWhatsAppClick = () => {
+    const whatsappNumber = "+2348123234586";
+    const message = encodeURIComponent(`Hi 16/16,`);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
@@ -28,14 +36,11 @@ const ProfileInfo = () => {
         </div>
         <hr className="mt-[20px] opacity-30" />
       </div>
-      <div className="h-[60px] lg:h-[100px]"></div>
-      <div className="w-full px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col gap-8 pb-10">
+      <div className="h-[60px] lg:h-[40px]"></div>
+      <div className="w-full px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col gap-4 pb-10">
         <div className="flex flex-col gap-2 mt-[20px] lg:mt-[50px]">
           <p className="text-[18px] lg:text-[24px] font-bold lg:text-center">
             Profile
-          </p>
-          <p className="text-[18px] lg:text-[24px] leading-[32px] lg:leading-[42px] lg:text-center">
-            To edit your profile information, contact 08123234586 via WhatsApp
           </p>
         </div>
         <div className="w-full flex flex-col gap-4">
@@ -154,6 +159,17 @@ const ProfileInfo = () => {
                 09087562201
               </p>
             </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[18px] lg:text-[24px] leading-[32px] lg:leading-[42px] lg:text-center">
+              To edit your profile information, contact 16/16 via WhatsApp
+            </p>
+            <button
+              className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold bg-black text-white"
+              onClick={handleWhatsAppClick}
+            >
+              Edit Profile
+            </button>
           </div>
         </div>
       </div>

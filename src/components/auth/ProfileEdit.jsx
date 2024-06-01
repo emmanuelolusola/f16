@@ -66,7 +66,7 @@ const ProfileEdit = () => {
         </div>
         <hr className="mt-[20px] opacity-30" />
       </div>
-      <div className="h-[80px] lg:h-[120px]"></div>
+      <div className="h-[80px] lg:h-[100px]"></div>
       <div className="w-full px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between pb-14">
         <div className="w-full flex flex-col gap-12">
           <div className="w-full flex flex-col gap-10">

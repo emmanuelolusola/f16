@@ -28,7 +28,7 @@ const ProfilePayment = () => {
         </div>
         <hr className="mt-[20px] opacity-30" />
       </div>
-      <div className="h-[60px] lg:h-[100px]"></div>
+      <div className="h-[60px] lg:h-[40px]"></div>
       <div className="w-full px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col gap-8 pb-10">
         <div className="flex flex-col gap-2 mt-[20px] lg:mt-[50px]">
           <p className="text-[18px] lg:text-[24px] font-bold">Payments</p>
@@ -48,20 +48,13 @@ const ProfilePayment = () => {
                     Opemipo Aikomo
                   </p>
                   <p className="text-[18px] lg:text-[24px] font-normal  text-white">
-                    10/01
+                    01/24
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="w-full flex justify-center">
-            <button
-              className="w-full h-[74px] text-[18px] font-bold border border-black text-black"
-              // onClick={() => navigate(`/profile/payment`)}
-            >
-              Change Card
-            </button>
-          </div>
+
           <div className="flex flex-col gap-4 mt-4">
             <div className="flex flex-col gap-0">
               <p className="w-full text-[18px] lg:text-[24px] font-normal text-[#5E5E5E]">
@@ -96,14 +89,21 @@ const ProfilePayment = () => {
               </p>
             </div>
           </div>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex flex-col gap-2 justify-center">
             <button
               className="w-full h-[74px] text-[18px] font-bold bg-black text-white"
               // onClick={() => navigate(`/profile/payment`)}
             >
               Cancel Membership
             </button>
+            <button
+              className="w-full h-[74px] text-[18px] font-bold border border-black text-black"
+              // onClick={() => navigate(`/profile/payment`)}
+            >
+              Change Card
+            </button>
           </div>
+          <div className="w-full flex justify-center"></div>
         </div>
       </div>
     </div>
