@@ -95,8 +95,8 @@ const Login = () => {
             <button
               disabled={!isEmailValid}
               className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
-              // onClick={handleButtonClick}
-              onClick={() => navigate(`/login-sent?email=${email}`)}
+              onClick={handleButtonClick}
+              // onClick={() => navigate(`/login-sent?email=${email}`)}
             >
               Send Login Link
             </button>
