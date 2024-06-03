@@ -23,6 +23,7 @@ import ProfileEdit from "./components/auth/ProfileEdit";
 import ProfileInfo from "./components/auth/ProfileInfo";
 import ProfileBookings from "./components/auth/ProfileBookings";
 import ProfilePayment from "./components/auth/ProfilePayment";
+import VerifyToken from "./components/auth/VerifyToken";
 
 function App() {
   return (
@@ -30,34 +31,41 @@ function App() {
       <Router>
         <ScrollToTopOnRouteChange />
         <Routes>
-          <Route path="/" element={<HomeNew />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/membership-program" element={<MailingList />} />
-          <Route path="/membership" element={<Membership />} />
+          <Route path="/" element={<HomeNew />} exact />
+          <Route path="/menu" element={<Menu />} exact />
+          <Route path="/membership-program" element={<MailingList />} exact />
+          <Route path="/membership" element={<Membership />} exact />
           <Route
             path="/membership/application"
             element={<MembershipApplication />}
+            exact
           />
-          <Route path="/membership/about" element={<MembershipAbout />} />
+          <Route path="/membership/about" element={<MembershipAbout />} exact />
           <Route
             path="/membership/application/received"
             element={<ApplicationReceived />}
+            exact
           />
-          <Route path="/co-working" element={<Coworking />} />
-          <Route path="/booked-coworking" element={<BookedCoworking />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/event/:id" element={<Event />} />
-          <Route path="/event/:id/registered" element={<Registered />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login-sent" element={<LoginSent />} />
-          <Route path="/profile/menu" element={<MenuProfile />} />
-          <Route path="/profile/payment" element={<Payment />} />
-          <Route path="/profile/payment/confirm" element={<PaymentConfirm />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/edit" element={<ProfileEdit />} />
-          <Route path="/profile/info" element={<ProfileInfo />} />
-          <Route path="/profile/bookings" element={<ProfileBookings />} />
-          <Route path="/profile/payments" element={<ProfilePayment />} />
+          <Route path="/co-working" element={<Coworking />} exact />
+          <Route path="/booked-coworking" element={<BookedCoworking />} exact />
+          <Route path="/about" element={<About />} exact />
+          <Route path="/event/:id" element={<Event />} exact />
+          <Route path="/event/:id/registered" element={<Registered />} exact />
+          <Route path="/login/:token" element={<VerifyToken />} exact />
+          <Route path="/login" element={<Login />} exact />
+          <Route path="/login-sent" element={<LoginSent />} exact />
+          <Route path="/profile/menu" element={<MenuProfile />} exact />
+          <Route path="/profile/payment" element={<Payment />} exact />
+          <Route
+            path="/profile/payment/confirm"
+            element={<PaymentConfirm />}
+            exact
+          />
+          <Route path="/profile" element={<Profile />} exact />
+          <Route path="/profile/edit" element={<ProfileEdit />} exact />
+          <Route path="/profile/info" element={<ProfileInfo />} exact />
+          <Route path="/profile/bookings" element={<ProfileBookings />} exact />
+          <Route path="/profile/payments" element={<ProfilePayment />} exact />
         </Routes>
       </Router>
     </>
