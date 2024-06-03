@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
 const VerifyToken = () => {
+  const navigate = useNavigate();
   const { token } = useParams();
   const [isValid, setIsValid] = useState(null);
   async function verifyToken() {
@@ -44,7 +45,45 @@ const VerifyToken = () => {
     return <Navigate to="/profile/payment" />;
   }
 
-  return <Navigate to="/login" />;
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
+  return (
+    <div className="w-full h-[100vh] py-[10px] lg:py-[20px] flex flex-col justify-between">
+      <div className="w-full flex justify-between items-center py-[10px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
+        <p
+          className="font-bold text-[18px] lg:text-[24px]"
+          onClick={() => {
+            navigate(`/`);
+            scrollToTop();
+          }}
+        >
+          16/16
+        </p>
+        <p
+          className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
+          onClick={() => {
+            navigate(`/menu`);
+            scrollToTop();
+          }}
+        >
+          Menu
+        </p>
+      </div>
+      <p className="font-normal text-[18px] lg:text-[24px] text-[#ff0000] text-center">
+        Invalid Login Token
+      </p>
+      <div className="w-full lg:w-[600px] px-[24px] lg:px-0 lg:mx-auto mb-6">
+        <button
+          className="w-full h-[74px] text-[18px] font-bold border border-black text-black"
+          onClick={() => navigate(`/login`)}
+        >
+          Log In
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default VerifyToken;

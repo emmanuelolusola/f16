@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const ProfilePayment = () => {
   const navigate = useNavigate();
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
