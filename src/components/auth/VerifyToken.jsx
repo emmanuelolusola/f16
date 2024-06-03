@@ -50,7 +50,7 @@ const VerifyToken = () => {
   };
 
   return (
-    <div className="w-full h-[100vh] py-[10px] lg:py-[20px] flex flex-col justify-between">
+    <div className="w-full h-[100dvh] py-[10px] lg:py-[20px] flex flex-col justify-between">
       <div className="w-full flex justify-between items-center py-[10px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
           className="font-bold text-[18px] lg:text-[24px]"
