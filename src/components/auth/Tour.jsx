@@ -50,7 +50,7 @@ const Tour = () => {
 
   const highlightClass = (section) => {
     return tips[currentTip].highlight === section
-      ? "relative z-50 bg-white px-8 py-4 faded-in"
+      ? "relative z-50 bg-white px-4 py-4 faded-in border-2 border-[#ff0000]"
       : "opacity-100";
   };
 
@@ -185,14 +185,14 @@ const Tour = () => {
           </p>
           <div className="flex gap-4">
             <button
-              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2 rounded disabled:bg-transparent disabled:text-white"
+              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2 disabled:bg-transparent disabled:text-white"
               onClick={handlePrevious}
               disabled={currentTip === 0}
             >
               Previous
             </button>
             <button
-              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2 rounded"
+              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2"
               onClick={handleNext}
             >
               {currentTip === tips.length - 1 ? "Finish" : "Next"}

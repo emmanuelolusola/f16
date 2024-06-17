@@ -67,7 +67,7 @@ const MenuProfile = () => {
       <div className="h-[80px] lg:h-[120px]"></div>
       <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
         <div
-          className="lg:w-[400px] flex flex-col gap-4"
+          className="lg:w-[400px] flex flex-col gap-4 cursor-pointer"
           onClick={() => navigate(`/profile`)}
         >
           <div className="w-full flex justify-between items-center">
