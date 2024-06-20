@@ -60,7 +60,7 @@ const LoginSent = () => {
         </div>
         <button
           className="w-full h-[74px] text-[18px] font-bold bg-black text-white"
-          onClick={() => navigate(`/tour`)}
+          onClick={() => navigate(`/bye-laws`)}
         >
           Open Mail
         </button>

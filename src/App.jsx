@@ -25,6 +25,7 @@ import ProfileBookings from "./components/auth/ProfileBookings";
 import ProfilePayment from "./components/auth/ProfilePayment";
 import VerifyToken from "./components/auth/VerifyToken";
 import Tour from "./components/auth/Tour";
+import ByeLaws from "./components/auth/ByeLaws";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route path="/profile/bookings" element={<ProfileBookings />} exact />
           <Route path="/profile/payments" element={<ProfilePayment />} exact />
           <Route path="/tour" element={<Tour />} exact />
+          <Route path="/bye-laws" element={<ByeLaws />} exact />
         </Routes>
       </Router>
     </>
