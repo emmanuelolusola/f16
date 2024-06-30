@@ -53,8 +53,8 @@ function App() {
           <Route path="/about" element={<About />} exact />
           <Route path="/event/:id" element={<Event />} exact />
           <Route path="/event/:id/registered" element={<Registered />} exact />
-          <Route path="/login/:token" element={<VerifyToken />} exact />
           <Route path="/login" element={<Login />} exact />
+          <Route path="/verify" element={<VerifyToken />} exact />
           <Route path="/login-sent" element={<LoginSent />} exact />
           <Route path="/profile/menu" element={<MenuProfile />} exact />
           <Route path="/profile/payment" element={<Payment />} exact />

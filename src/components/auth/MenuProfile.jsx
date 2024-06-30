@@ -124,6 +124,15 @@ const MenuProfile = () => {
           >
             Membership
           </p>
+          <p
+            className="font-bold text-[18px] lg:text-[24px] hover:text-[#FF3131] cursor-pointer"
+            onClick={() => {
+              navigate(`/about`);
+              scrollToTop();
+            }}
+          >
+            FAQs
+          </p>
           <div className="flex gap-0 items-start justify-start lg:items-center">
             <a
               href="https://www.16by16.co/home/reservations "

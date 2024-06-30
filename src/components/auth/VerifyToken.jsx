@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams, useNavigate } from "react-router-dom";
+import { Navigate, useSearchParams, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
 const VerifyToken = () => {
   const navigate = useNavigate();
-  const { token } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
   const [isValid, setIsValid] = useState(null);
+
   async function verifyToken() {
-    try {
-      const response = await fetch(`http://localhost:3000/api/${token}`);
-      if (response.data) {
-        setIsValid(true);
-      }
-    } catch (error) {
+    if (!token) {
       setIsValid(false);
-      console.log(error);
+      return;
+    }
+
+    const response = await (
+      await fetch(
+        `https://friendsof16api.up.railway.app/api/accounts/verify-magic-link?token=${token}`
+      )
+    ).json();
+
+    if (response.status === "success") {
+      const { id, email, name } = response.user;
+
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("userID", id);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userName", name);
+
+      setIsValid(true);
+    } else {
+      setIsValid(false);
     }
   }
+
   useEffect(() => {
     verifyToken();
     console.log("error");
@@ -41,8 +58,9 @@ const VerifyToken = () => {
       </div>
     );
   }
+
   if (isValid === true) {
-    return <Navigate to="/profile/payment" />;
+    return <Navigate to="/bye-laws" />;
   }
 
   const scrollToTop = () => {
