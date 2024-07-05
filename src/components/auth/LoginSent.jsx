@@ -21,7 +21,7 @@ const LoginSent = () => {
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px]"
+            className="font-bold text-[18px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -30,7 +30,7 @@ const LoginSent = () => {
             16/16
           </p>
           <button
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px]"
             onClick={() => {
               navigate(-1);
               scrollToTop();
@@ -42,13 +42,11 @@ const LoginSent = () => {
         <hr className="mt-[20px] opacity-30" />
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
-      <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between">
+      <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto flex flex-col justify-between">
         <div className="w-full flex flex-col gap-4">
-          <p className="font-bold text-[18px] lg:text-[24px]">
-            Login link sent
-          </p>
+          <p className="font-bold text-[18px]">Login link sent</p>
           <div className="w-full flex flex-col gap-0">
-            <p className="text-[18px] lg:text-[24px] font-normal">
+            <p className="text-[18px] font-normal">
               Your profile login link has been sent to {email}
             </p>
           </div>

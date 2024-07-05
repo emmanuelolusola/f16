@@ -43,10 +43,10 @@ const VerifyToken = () => {
     return (
       <div className="w-full h-[100vh] flex justify-center items-center">
         <div className="w-full h-[80vh] flex flex-col justify-between items-center">
-          <p className="font-bold text-[18px] lg:text-[24px]">Friends of 16</p>
+          <p className="font-bold text-[18px]">Friends of 16</p>
           <img src={logo} alt="" />
           <div className="flex flex-col gap-4 justify-center items-center">
-            <p className="font-normal text-[18px] lg:text-[24px]">Logging In</p>
+            <p className="font-normal text-[18px]">Logging In</p>
             <div
               className="w-8 h-8 border-4 border-t-4 border-black rounded-full animate-spin"
               style={{
@@ -71,7 +71,7 @@ const VerifyToken = () => {
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px] flex flex-col justify-between">
       <div className="w-full flex justify-between items-center py-[10px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
-          className="font-bold text-[18px] lg:text-[24px]"
+          className="font-bold text-[18px] cursor-pointer"
           onClick={() => {
             navigate(`/`);
             scrollToTop();
@@ -80,7 +80,7 @@ const VerifyToken = () => {
           16/16
         </p>
         <p
-          className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
+          className="font-normal text-[18px] cursor-pointer"
           onClick={() => {
             navigate(`/menu`);
             scrollToTop();
@@ -89,7 +89,7 @@ const VerifyToken = () => {
           Menu
         </p>
       </div>
-      <p className="font-normal text-[18px] lg:text-[24px] text-[#ff0000] text-center">
+      <p className="font-normal text-[18px] text-[#ff0000] text-center">
         Invalid Login Token
       </p>
       <div className="w-full lg:w-[600px] px-[24px] lg:px-0 lg:mx-auto mb-6">

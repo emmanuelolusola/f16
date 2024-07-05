@@ -123,8 +123,24 @@ function App() {
             }
             exact
           />
-          <Route path="/tour" element={<Tour />} exact />
-          <Route path="/bye-laws" element={<ByeLaws />} exact />
+          <Route
+            path="/tour"
+            element={
+              <ProtectedRoute>
+                <Tour />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/bye-laws"
+            element={
+              <ProtectedRoute>
+                <ByeLaws />
+              </ProtectedRoute>
+            }
+            exact
+          />
         </Routes>
       </Router>
     </>

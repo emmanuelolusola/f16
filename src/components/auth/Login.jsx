@@ -40,7 +40,7 @@ const Login = () => {
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px] cursor-pointer"
+            className="font-bold text-[18px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -49,7 +49,7 @@ const Login = () => {
             16/16
           </p>
           <button
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px]"
             onClick={() => {
               navigate(-1);
               scrollToTop();
@@ -61,27 +61,21 @@ const Login = () => {
         <hr className="mt-[20px] opacity-30" />
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
-      <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col justify-between">
+      <div className="w-full h-[82dvh] px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto flex flex-col justify-between">
         <div className="w-full flex flex-col gap-4">
-          <p className="font-bold text-[18px] lg:text-[24px]">
-            Login to Friends of 16
-          </p>
+          <p className="font-bold text-[18px]">Login to Friends of 16</p>
           <div className="w-full flex flex-col gap-0">
-            <p className="text-[18px] lg:text-[24px] font-normal">
-              Email Address
-            </p>
+            <p className="text-[18px] font-normal">Email Address</p>
             <input
               type="email"
               id="email"
               autoFocus
               value={email}
               onChange={handleEmailChange}
-              className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px]"
+              className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
             />
             {errorMessage && (
-              <p className="text-red-500 text-[18px] lg:text-[24px]">
-                {errorMessage}
-              </p>
+              <p className="text-red-500 text-[18px]">{errorMessage}</p>
             )}
           </div>
           {loading ? (
@@ -106,7 +100,7 @@ const Login = () => {
           className="w-full cursor-pointer"
           onClick={() => navigate(`/membership`)}
         >
-          <p className="text-[18px] lg:text-[24px] font-normal text-center underline underline-offset-2">
+          <p className="text-[18px] font-normal text-center underline underline-offset-2">
             Apply for membership
           </p>
         </div>

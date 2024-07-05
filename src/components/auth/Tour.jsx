@@ -68,7 +68,7 @@ const Tour = () => {
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px] z-30">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px] cursor-pointer"
+            className="font-bold text-[18px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -77,7 +77,7 @@ const Tour = () => {
             16/16
           </p>
           <button
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px]"
             onClick={() => {
               navigate(-1);
               scrollToTop();
@@ -90,21 +90,19 @@ const Tour = () => {
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
       <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
-        <div className={`lg:w-[400px] flex flex-col gap-8`}>
+        <div className={`lg:w-[500px] flex flex-col gap-8`}>
           <div className="w-full flex justify-between items-start">
             <div className="flex gap-2">
               <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
                 <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
               </div>
               <div className="flex flex-col gap-0">
-                <p className="font-bold text-[18px] lg:text-[24px]">John Doe</p>
-                <p className="font-normal text-[18px] lg:text-[24px]">
-                  Inactive
-                </p>
+                <p className="font-bold text-[18px]">John Doe</p>
+                <p className="font-normal text-[18px]">Inactive</p>
               </div>
             </div>
             <button
-              className={`font-normal text-[18px] lg:text-[24px] cursor-pointer ${highlightClass(
+              className={`font-normal text-[18px] cursor-pointer ${highlightClass(
                 "edit"
               )}`}
               onClick={() => navigate(`/profile/edit`)}
@@ -115,36 +113,20 @@ const Tour = () => {
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Joined
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                Jun X, 20XX
-              </p>
+              <p className="w-[30%] font-normal text-[18px]">Joined</p>
+              <p className="font-bold text-[18px]">Jun X, 20XX</p>
             </div>
             <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Expires
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                Dec XX, 20XX{" "}
-              </p>
+              <p className="w-[30%] font-normal text-[18px]">Expires</p>
+              <p className="font-bold text-[18px]">Dec XX, 20XX </p>
             </div>
             <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Phone
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                070XXXXXXXX
-              </p>
+              <p className="w-[30%] font-normal text-[18px]">Phone</p>
+              <p className="font-bold text-[18px]">070XXXXXXXX</p>
             </div>
             <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Email
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                ****@gmail.com
-              </p>
+              <p className="w-[30%] font-normal text-[18px]">Email</p>
+              <p className="font-bold text-[18px]">****@gmail.com</p>
             </div>
           </div>
         </div>
@@ -155,7 +137,7 @@ const Tour = () => {
             )}`}
             // onClick={() => navigate(`/profile/info`)}
           >
-            <p className="font-bold text-[18px] lg:text-[24px]">Profile</p>
+            <p className="font-bold text-[18px]">Profile</p>
             <img src={arrow} alt="" />
           </div>
           <div
@@ -164,7 +146,7 @@ const Tour = () => {
             )}`}
             // onClick={() => navigate(`/profile/bookings`)}
           >
-            <p className="font-bold text-[18px] lg:text-[24px]">Bookings</p>
+            <p className="font-bold text-[18px]">Bookings</p>
             <img src={arrow} alt="" />
           </div>
           <div
@@ -173,26 +155,24 @@ const Tour = () => {
             )}`}
             // onClick={() => navigate(`/profile/payments`)}
           >
-            <p className="font-bold text-[18px] lg:text-[24px]">Payment</p>
+            <p className="font-bold text-[18px]">Payment</p>
             <img src={arrow} alt="" />
           </div>
         </div>
       </div>
       {currentTip < tips.length && (
         <div className="w-full lg:w-[600px] lg:mx-auto fixed inset-0 flex flex-col justify-center items-center z-40 text-white text-center px-[24px] lg:px-0">
-          <p className="mb-4 text-[18px] lg:text-[24px]">
-            {tips[currentTip].text}
-          </p>
+          <p className="mb-4 text-[18px]">{tips[currentTip].text}</p>
           <div className="flex gap-4">
             <button
-              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2 disabled:bg-transparent disabled:text-white"
+              className="font-normal text-[18px] bg-white text-black px-8 py-2 disabled:bg-transparent disabled:text-white"
               onClick={handlePrevious}
               disabled={currentTip === 0}
             >
               Previous
             </button>
             <button
-              className="font-normal text-[18px] lg:text-[24px] bg-white text-black px-8 py-2"
+              className="font-normal text-[18px] bg-white text-black px-8 py-2"
               onClick={handleNext}
             >
               {currentTip === tips.length - 1 ? "Finish" : "Next"}
