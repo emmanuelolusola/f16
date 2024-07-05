@@ -149,7 +149,7 @@ const MembershipApplication = () => {
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
-          className="font-bold text-[18px] lg:text-[24px]"
+          className="font-bold text-[18px] cursor-pointer"
           onClick={() => {
             navigate(`/`);
             scrollToTop();
@@ -158,7 +158,7 @@ const MembershipApplication = () => {
           16/16
         </p>
         <p
-          className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
+          className="font-normal text-[18px] cursor-pointer"
           onClick={() => {
             navigate(`/menu`);
             scrollToTop();
@@ -168,11 +168,11 @@ const MembershipApplication = () => {
         </p>
       </div>
       <div className="w-full px-[24px] lg:px-[96px]">
-        <div className="mt-[50px] lg:mt-[70px] border border-b-black opacity-[10%]"></div>
+        <div className="mt-[50px] lg:mt-[70px]"></div>
       </div>
-      <div className="px-[24px] lg:px-0 lg:w-[800px] lg:mx-auto flex flex-col gap-4 lg:gap-8">
+      <div className="px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto flex flex-col gap-4 lg:gap-8">
         <div className="flex flex-col gap-4 mt-[20px] lg:mt-[50px]">
-          <p className="text-[18px] lg:text-[24px] font-bold lg:text-center">
+          <p className="text-[18px] font-bold lg:text-center">
             Apply to Friends of 16
           </p>
         </div>
@@ -190,11 +190,7 @@ const MembershipApplication = () => {
           </StepTab>
         </div>
         {step === 1 && (
-          <div
-            className={`step flex flex-col gap-4 ${
-              step === 1 ? "slide-in" : "slide-out"
-            }`}
-          >
+          <div className={`step flex flex-col gap-4 ${step === 1 ? "" : ""}`}>
             <div className="w-full flex flex-col gap-0">
               {/* first name */}
               <p className="text-[18px] font-normal">First Name</p>
@@ -305,11 +301,7 @@ const MembershipApplication = () => {
         )}
 
         {step === 2 && (
-          <div
-            className={`step flex flex-col gap-4 ${
-              step === 2 ? "slide-in" : "slide-out"
-            }`}
-          >
+          <div className={`step flex flex-col gap-4 ${step === 2 ? "" : ""}`}>
             {/* nationality */}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Nationality</p>
@@ -355,8 +347,8 @@ const MembershipApplication = () => {
               <Select
                 placeholder="Select Country"
                 options={COUNTRIES.map((country) => ({
-                  value: country.name,
-                  label: country.name,
+                  value: country,
+                  label: country,
                 }))}
                 onChange={(selectedOption) =>
                   setAddressInfo((prevState) => ({
@@ -379,11 +371,7 @@ const MembershipApplication = () => {
         )}
 
         {step === 3 && (
-          <div
-            className={`step flex flex-col gap-4 ${
-              step === 3 ? "slide-in" : "slide-out"
-            }`}
-          >
+          <div className={`step flex flex-col gap-4 ${step === 3 ? "" : ""}`}>
             <div className="w-full flex flex-col gap-0">
               {/* phone number */}
               <p className="text-[18px] font-normal">Phone Number</p>
@@ -500,7 +488,7 @@ const MembershipApplication = () => {
                 <button
                   onClick={handleSubmit}
                   disabled
-                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 >
                   Please wait
                 </button>
@@ -508,24 +496,34 @@ const MembershipApplication = () => {
                 <button
                   onClick={handleSubmit}
                   disabled
-                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 >
                   Submit
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px]"
+                  className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px]"
                 >
                   Submit
                 </button>
               )}
             </div>
+          ) : !profileInfo.firstName ||
+            !profileInfo.lastName ||
+            !profileInfo.selectedDate ? (
+            <button
+              onClick={handleNext}
+              disabled
+              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+            >
+              Next
+            </button>
           ) : (
             <button
               onClick={handleNext}
               disabled={step === 3}
-              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold mb-[10px]"
+              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px]"
             >
               Next
             </button>
@@ -533,7 +531,7 @@ const MembershipApplication = () => {
           <button
             onClick={handlePrev}
             disabled={step === 1}
-            className={`w-full h-[66px] text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold mb-[10px] ${
+            className={`w-full h-[66px] text-[#0a0a0a] text-[18px] font-bold mb-[10px] ${
               step === 1
                 ? "border border-[#e1e1e1] text-[#e1e1e1]"
                 : "border border-[#0a0a0a]"

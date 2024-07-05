@@ -56,3 +56,12 @@ export const login = async (body) => {
     throw new Error(err.response.data.message);
   }
 };
+
+export const bookCoworking = async (body) => {
+  try {
+    const { data } = await instance.get("/schedules", body);
+    return data;
+  } catch (err) {
+    console.log(err.response.data.message);
+  }
+};

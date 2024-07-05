@@ -64,16 +64,24 @@ const Event = (props) => {
   );
 
   const dates = useMemo(() => {
-    if (!event || event.StartDate === event.EndDate) return null;
+    if (!event) return null;
+
     let start = moment(event.StartDate);
     let end = moment(event.EndDate);
+
+    if (start.isSame(end)) {
+      return [start.format("YYYY-MM-DD")];
+    }
+
     let dates = [];
     while (start.isSameOrBefore(end)) {
-      dates.push(start.format("ddd, MMM D"));
+      dates.push(start.format("YYYY-MM-DD"));
       start.add(1, "days");
     }
     return dates;
   }, [event]);
+
+  console.log(dates);
 
   const transactionConfig = {
     publicKey: "pk_live_93613975cae618d43662167ee9c54cf063bdd6ed",
@@ -181,13 +189,13 @@ const Event = (props) => {
           event.TimeSlots
         }&date=${selectedDate}&address=${event.Address}&imgUrl=${
           event.Poster[0].url
-        }&start=${event.StartDate}&end=${event.EndDate}&type=${"event"}&rsvp=${
-          event.RSVP
-        }&price=${event.Price}`
+        }&starts=${event.StartDate}&ends=${
+          event.EndDate
+        }&type=${"event"}&rsvp=${event.RSVP}&price=${event.Price}`
       );
     } catch (error) {
       setLoading(false);
-      console.error(error);
+      error;
     }
   };
 
@@ -214,21 +222,19 @@ const Event = (props) => {
       <div className="bg-white fixed justify w-full top-0 px-[24px] lg:px-[96px] pt-[10px] lg:pt-[30px] z-10">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px] cursor-pointer"
             onClick={() => navigate(`/`)}
           >
             Back
           </p>
           <Link to="/menu">
-            <button className="font-normal text-[18px] lg:text-[24px]">
-              Menu
-            </button>
+            <button className="font-normal text-[18px]">Menu</button>
           </Link>
         </div>
       </div>
       <div className="bg-white sticky justify w-full top-4 pt-[10px] lg:pt-[30px] px-[24px] lg:px-[96px]">
         <div className="w-full lg:w-[600px] lg:mx-auto flex justify-between items-center mt-[50px]">
-          <p className="font-bold text-[18px] lg:text-[24px]">{event.Name}</p>
+          <p className="font-bold text-[18px]">{event.Name}</p>
         </div>
         <hr className="mt-[20px] opacity-30" />
       </div>
@@ -240,17 +246,17 @@ const Event = (props) => {
         <div className="flex flex-col gap-4">
           {currentMoment.isSameOrBefore(event.EndDate) ? (
             <button
-              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] lg:text-[24px] font-bold"
+              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold"
               onClick={toggleDrawer}
             >
               {event?.Price > 0 ? "Buy Ticket" : "Get Ticket"}
             </button>
           ) : currentMoment.isAfter(event.EndDate) ? (
-            <button className="link-no-highlight w-full h-[66px] bg-[#e1e1e1] text-[#FF3131] text-[18px] lg:text-[24px] font-bold">
+            <button className="link-no-highlight w-full h-[66px] bg-[#e1e1e1] text-[#FF3131] text-[18px] font-bold">
               Closed
             </button>
           ) : (
-            <button className="link-no-highlight w-full h-[66px] bg-[#e1e1e1] text-[#bebebe] text-[18px] lg:text-[24px] font-bold">
+            <button className="link-no-highlight w-full h-[66px] bg-[#e1e1e1] text-[#bebebe] text-[18px] font-bold">
               Sold out
             </button>
           )}
@@ -258,7 +264,7 @@ const Event = (props) => {
           {event?.RSVP === true &&
           currentMoment.isSameOrBefore(event.EndDate) ? (
             <button
-              className="w-full h-[64px] border border-[#0a0a0a] text-[#0a0a0a] text-[18px] lg:text-[24px] font-bold"
+              className="w-full h-[64px] border border-[#0a0a0a] text-[#0a0a0a] text-[18px] font-bold"
               onClick={() => share(event.Name, event.URL)}
               title={event.Name}
               url={event.URL}
@@ -267,7 +273,7 @@ const Event = (props) => {
             </button>
           ) : (
             <button
-              className="link-no-highlight w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] lg:text-[24px] font-bold hidden"
+              className="link-no-highlight w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] font-bold hidden"
               disabled
             >
               Share
@@ -277,45 +283,33 @@ const Event = (props) => {
 
         {event?.About ? (
           <div className="flex flex-col gap-[8px]">
-            <p className="font-normal text-[18px] lg:text-[24px]">
-              {event.About}
-            </p>
+            <p className="font-normal text-[18px]">{event.About}</p>
           </div>
         ) : null}
         {event?.Price > 0 ? (
           <div className="flex flex-col gap-[8px]">
-            <p className="font-normal text-[18px] lg:text-[24px]">Price</p>
-            <p className="font-bold text-[18px] lg:text-[24px]">
-              ₦{event.Price}
-            </p>
+            <p className="font-normal text-[18px]">Price</p>
+            <p className="font-bold text-[18px]">₦{event.Price}</p>
           </div>
         ) : null}
         <div className="flex flex-col gap-[8px]">
-          <p className="font-normal text-[18px] lg:text-[24px]">Date</p>
+          <p className="font-normal text-[18px]">Date</p>
           {event?.StartDate ? (
-            <p className="font-bold text-[18px] lg:text-[24px]">
-              {getDate(event.StartDate)}
-            </p>
+            <p className="font-bold text-[18px]">{getDate(event.StartDate)}</p>
           ) : null}
           {event?.EndDate && event?.EndDate !== event?.StartDate ? (
-            <p className="font-bold text-[18px] lg:text-[24px]">
-              {getDate(event.EndDate)}
-            </p>
+            <p className="font-bold text-[18px]">{getDate(event.EndDate)}</p>
           ) : null}
         </div>
         <div className="flex flex-col gap-[8px]">
-          <p className="font-normal text-[18px] lg:text-[24px]">Time</p>
+          <p className="font-normal text-[18px]">Time</p>
           {event?.TimeSlots ? (
-            <p className="font-bold text-[18px] lg:text-[24px]">
-              {event.TimeSlots}
-            </p>
+            <p className="font-bold text-[18px]">{event.TimeSlots}</p>
           ) : null}
         </div>
         <div className="flex flex-col gap-[8px]">
-          <p className="font-normal text-[18px] lg:text-[24px]">Venue</p>
-          <p className="font-bold text-[18px] lg:text-[24px]">
-            {event.Address}
-          </p>
+          <p className="font-normal text-[18px]">Venue</p>
+          <p className="font-bold text-[18px]">{event.Address}</p>
         </div>
       </div>
       {window.innerWidth <= 768 ? (
@@ -335,14 +329,14 @@ const Event = (props) => {
                   placeholder="Select day"
                   options={dates.map((day) => ({
                     value: day,
-                    label: day,
+                    label: getDate(day),
                   }))}
                   onChange={(values) => setSelectedDate(values[0].value)}
                   className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
                   color="black"
                   dropdownHeight="220px"
                   contentRenderer={() => {
-                    return <div>{selectedDate}</div>;
+                    return <div>{getDate(selectedDate)}</div>;
                   }}
                 />
               </div>
@@ -430,29 +424,29 @@ const Event = (props) => {
       ) : (
         <Modal open={isOpen} onClose={toggleDrawer} center closeIcon>
           <div className="w-[500px] flex flex-col gap-[26px] p-4">
-            <p className="text-[18px] lg:text-[24px] font-bold">RSVP</p>
+            <p className="text-[18px] font-bold">RSVP</p>
             {dates ? (
               <div className="w-full flex flex-col gap-0">
-                <p className="text-[18px] lg:text-[24px] font-normal">Day</p>
+                <p className="text-[18px] font-normal">Day</p>
                 <Select
                   placeholder="Select day"
                   options={dates.map((day) => ({
                     value: day,
-                    label: day,
+                    label: getDate(day),
                   }))}
                   onChange={(values) => setSelectedDate(values[0].value)}
-                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px] placeholder-[18px]"
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
                   color="black"
                   dropdownHeight="220px"
                   contentRenderer={() => {
-                    return <div>{selectedDate}</div>;
+                    return <div>{getDate(selectedDate)}</div>;
                   }}
                 />
               </div>
             ) : null}
             {event?.times ? (
               <div className="w-full flex flex-col gap-0">
-                <p className="text-[18px] lg:text-[24px] font-normal">Time</p>
+                <p className="text-[18px] font-normal">Time</p>
                 <Select
                   placeholder="Select time"
                   options={event.times.map((time) => ({
@@ -460,7 +454,7 @@ const Event = (props) => {
                     label: time,
                   }))}
                   onChange={(values) => setSelectedTime(values[0].value)}
-                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px] placeholder-[18px]"
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px] placeholder-[18px]"
                   color="black"
                   contentRenderer={() => {
                     return <div>{selectedTime}</div>;
@@ -469,19 +463,17 @@ const Event = (props) => {
               </div>
             ) : null}
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] lg:text-[24px] font-normal">Name</p>
+              <p className="text-[18px] font-normal">Name</p>
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={handleNameChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px]"
+                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
               />
             </div>
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] lg:text-[24px] font-normal">
-                Email Address
-              </p>
+              <p className="text-[18px] font-normal">Email Address</p>
               <input
                 type="email"
                 id="email"
@@ -491,15 +483,13 @@ const Event = (props) => {
               />
             </div>
             <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] lg:text-[24px] font-normal">
-                Phone Number
-              </p>
+              <p className="text-[18px] font-normal">Phone Number</p>
               <input
                 type="tel"
                 id="phone"
                 value={phone}
                 onChange={handlePhoneChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] px-[12px] py-[10px]"
+                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
               />
             </div>
             <div className="flex gap-2 items-center">
@@ -509,17 +499,14 @@ const Event = (props) => {
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(!rememberMe)}
               />
-              <label
-                htmlFor="remember-me"
-                className="text-[18px] lg:text-[24px] font-normal"
-              >
+              <label htmlFor="remember-me" className="text-[18px] font-normal">
                 Remember me
               </label>
             </div>
             {loading ? (
               <button
                 disabled
-                className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 onClick={handleButtonClick}
               >
                 Please wait
@@ -529,7 +516,7 @@ const Event = (props) => {
                 disabled={
                   loading || !name || !phone || (!event.dates && !isEmailValid)
                 }
-                className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 onClick={handleButtonClick}
               >
                 {event?.Price > 0 ? "Buy Ticket" : "Get Ticket"}

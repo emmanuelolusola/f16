@@ -26,6 +26,8 @@ import ProfilePayment from "./components/auth/ProfilePayment";
 import VerifyToken from "./components/auth/VerifyToken";
 import Tour from "./components/auth/Tour";
 import ByeLaws from "./components/auth/ByeLaws";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedMenu from "./components/auth/ProtectedMenu";
 
 function App() {
   return (
@@ -34,7 +36,7 @@ function App() {
         <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<HomeNew />} exact />
-          <Route path="/menu" element={<Menu />} exact />
+          <Route path="/menu" element={<ProtectedMenu />} exact />
           <Route path="/membership-program" element={<MailingList />} exact />
           <Route path="/membership" element={<Membership />} exact />
           <Route
@@ -56,18 +58,71 @@ function App() {
           <Route path="/login" element={<Login />} exact />
           <Route path="/verify" element={<VerifyToken />} exact />
           <Route path="/login-sent" element={<LoginSent />} exact />
-          <Route path="/profile/menu" element={<MenuProfile />} exact />
-          <Route path="/profile/payment" element={<Payment />} exact />
+          // Protected Routes below
+          <Route path="/menu/:id" element={<ProtectedMenu />} exact />
           <Route
-            path="/profile/payment/confirm"
-            element={<PaymentConfirm />}
+            path="/profile/payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
             exact
           />
-          <Route path="/profile" element={<Profile />} exact />
-          <Route path="/profile/edit" element={<ProfileEdit />} exact />
-          <Route path="/profile/info" element={<ProfileInfo />} exact />
-          <Route path="/profile/bookings" element={<ProfileBookings />} exact />
-          <Route path="/profile/payments" element={<ProfilePayment />} exact />
+          <Route
+            path="/profile/payment/confirm"
+            element={
+              <ProtectedRoute>
+                <PaymentConfirm />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/profile/edit"
+            element={
+              <ProtectedRoute>
+                <ProfileEdit />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/profile/info"
+            element={
+              <ProtectedRoute>
+                <ProfileInfo />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/profile/bookings"
+            element={
+              <ProtectedRoute>
+                <ProfileBookings />
+              </ProtectedRoute>
+            }
+            exact
+          />
+          <Route
+            path="/profile/payments"
+            element={
+              <ProtectedRoute>
+                <ProfilePayment />
+              </ProtectedRoute>
+            }
+            exact
+          />
           <Route path="/tour" element={<Tour />} exact />
           <Route path="/bye-laws" element={<ByeLaws />} exact />
         </Routes>

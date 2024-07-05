@@ -47,7 +47,7 @@ const Menu = () => {
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px]"
+            className="font-bold text-[18px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -56,7 +56,7 @@ const Menu = () => {
             16/16
           </p>
           <button
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px]"
             onClick={() => {
               navigate(-1);
               scrollToTop();
@@ -70,19 +70,8 @@ const Menu = () => {
       <div className="h-[80px] lg:h-[120px]"></div>
       <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
         <div className="lg:w-[400px] flex flex-col gap-4">
-          {/* <a
-            href="https://maps.app.goo.gl/EdXswCyELe3quRJS6?g_st=ic"
-            target="_blank"
-            rel="noreferrer"
-            className="link-no-highlight flex gap-2 text-[18px] font-normal underline"
-          >
-            <img src={location} alt="" />
-            <p className="font-normal text-[18px] lg:text-[24px]">
-              16 Kofo Abayomi
-            </p>
-          </a> */}
           <button
-            className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold border border-black text-black"
+            className="w-full h-[74px] text-[18px] font-bold border border-black text-black"
             onClick={() => navigate(`/login`)}
           >
             Login
@@ -90,7 +79,7 @@ const Menu = () => {
         </div>
         <div className="flex flex-col gap-[24px] lg:items-end">
           <p
-            className="font-bold text-[18px] lg:text-[24px] hover:text-[#FF3131] cursor-pointer"
+            className="font-bold text-[18px] hover:text-[#FF3131] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -99,7 +88,7 @@ const Menu = () => {
             Home
           </p>
           <p
-            className="font-bold text-[18px] lg:text-[24px] hover:text-[#FF3131] cursor-pointer"
+            className="font-bold text-[18px] hover:text-[#FF3131] cursor-pointer"
             onClick={() => {
               navigate(`/about`);
               scrollToTop();
@@ -108,16 +97,7 @@ const Menu = () => {
             About 16/16
           </p>
           <p
-            className="font-bold text-[18px] lg:text-[24px] cursor-pointer hover:text-[#FF3131]"
-            onClick={() => {
-              navigate(`/co-working`);
-              scrollToTop();
-            }}
-          >
-            Co-working
-          </p>
-          <p
-            className="font-bold text-[18px] lg:text-[24px] cursor-pointer hover:text-[#FF3131]"
+            className="font-bold text-[18px] cursor-pointer hover:text-[#FF3131]"
             onClick={() => {
               navigate(`/membership`);
               scrollToTop();
@@ -130,7 +110,7 @@ const Menu = () => {
               href="https://www.16by16.co/home/reservations "
               target="_blank"
               rel="noreferrer"
-              className="link-no-highlight text-[18px] lg:text-[24px] font-bold hover:text-[#FF3131]"
+              className="link-no-highlight text-[18px] font-bold hover:text-[#FF3131]"
             >
               Reservations
             </a>
@@ -140,7 +120,7 @@ const Menu = () => {
             className="link-no-highlight flex gap-0 items-start justify-start lg:items-center"
             onClick={toggleDrawer}
           >
-            <p className="text-[18px] lg:text-[24px] font-bold hover:text-[#FF3131] cursor-pointer">
+            <p className="text-[18px] font-bold hover:text-[#FF3131] cursor-pointer">
               Contact us
             </p>
             <img src={arrowUp} alt="" />
@@ -181,18 +161,18 @@ const Menu = () => {
         <Modal open={isOpen} onClose={toggleDrawer} center closeIcon>
           <div className="w-[500px] flex flex-col gap-[26px] p-4">
             <div className="flex gap-[5px] items-center justify-start">
-              <p className="text-[18px] lg:text-[24px] font-bold">Contact us</p>
+              <p className="text-[18px] font-bold">Contact us</p>
               <img src={arrowUp} alt="" width={30} />
             </div>
             <div className="flex flex-col gap-4">
               <button
-                className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold border border-black text-black hover:text-[#FF3131] hover:border-[#FF3131]"
+                className="w-full h-[74px] text-[18px] font-bold border border-black text-black hover:text-[#FF3131] hover:border-[#FF3131]"
                 onClick={handleWhatsAppClick}
               >
                 WhatsApp
               </button>
               <button
-                className="w-full h-[74px] text-[18px] lg:text-[24px] font-bold border border-black text-black hover:text-[#FF3131] hover:border-[#FF3131]"
+                className="w-full h-[74px] text-[18px] font-bold border border-black text-black hover:text-[#FF3131] hover:border-[#FF3131]"
                 onClick={handleEmailClick}
               >
                 Email

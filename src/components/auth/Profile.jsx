@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/arrow_forward_ios.svg";
 
 const Profile = () => {
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const scrollToTop = () => {
     window.scroll(0, 0);
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem("userID");
+      if (userId) {
+        try {
+          setLoading(true);
+          const response = await fetch(
+            `https://friendsof16api.up.railway.app/api/accounts/profile/${userId}`
+          );
+          const data = await response.json();
+          if (data.status === "success") {
+            setUserData(data.account);
+          }
+        } catch (error) {
+          console.error("Failed to fetch user data:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
         <div className="w-full flex justify-between items-center mt-[15px]">
           <p
-            className="font-bold text-[18px] lg:text-[24px]"
+            className="font-bold text-[18px] cursor-pointer"
             onClick={() => {
               navigate(`/`);
               scrollToTop();
@@ -21,7 +48,7 @@ const Profile = () => {
             16/16
           </p>
           <button
-            className="font-normal text-[18px] lg:text-[24px]"
+            className="font-normal text-[18px]"
             onClick={() => {
               navigate(-1);
               scrollToTop();
@@ -33,88 +60,89 @@ const Profile = () => {
         <hr className="mt-[20px] opacity-30" />
       </div>
       <div className="h-[80px] lg:h-[120px]"></div>
-      <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
-        <div className="lg:w-[400px] flex flex-col gap-8">
-          <div className="w-full flex justify-between items-start">
-            <div className="flex gap-2">
-              <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
-                <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+      {loading ? (
+        <div className="w-full h-[80vh] flex justify-center items-center">
+          <div
+            className="w-8 h-8 border-4 border-t-4 border-black rounded-full animate-spin"
+            style={{
+              borderTopColor: "transparent",
+            }}
+          ></div>
+        </div>
+      ) : (
+        <div className="px-[24px] lg:px-[96px] h-[82dvh] grid content-between lg:flex lg:justify-between pb-[0px]">
+          <div className="lg:w-[500px] flex flex-col gap-8">
+            <div className="w-full flex justify-between items-start">
+              <div className="flex gap-2">
+                <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
+                  <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+                </div>
+                <div className="flex flex-col gap-0">
+                  <p className="font-bold text-[18px]">{userData.Name}</p>
+                  <p className="font-normal text-[18px]">Inactive</p>
+                </div>
               </div>
-              <div className="flex flex-col gap-0">
-                <p className="font-bold text-[18px] lg:text-[24px]">
-                  Opemipo Aikomo
+              {/* <p
+                className="font-normal text-[18px] cursor-pointer"
+                onClick={() => navigate(`/profile/edit`)}
+              >
+                Edit
+              </p> */}
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between gap-10">
+                <p className="font-normal text-[18px]">Joined</p>
+                <p className="font-bold text-[18px]">
+                  {/* Payment Info not added yet */}
+                  {userData.Name}
                 </p>
-                <p className="font-normal text-[18px] lg:text-[24px]">
-                  Inactive
+              </div>
+              <div className="flex justify-between gap-10">
+                <p className="font-normal text-[18px]">Expires</p>
+                <p className="font-bold text-[18px]">
+                  {/* Payment Info not added yet */}
+                  {userData.Name}
+                </p>
+              </div>
+              <div className="flex justify-between gap-10">
+                <p className="font-normal text-[18px]">Phone</p>
+                <p className="font-bold text-[18px]">
+                  {userData["Phone Number (from Application)"][0]}
+                </p>
+              </div>
+              <div className="flex justify-between gap-10">
+                <p className=" font-normal text-[18px]">Email</p>
+                <p className="w-[50%] lg:w-[80%] font-bold text-[18px] break-all text-end">
+                  {userData["Email Address (from Application)"][0]}
                 </p>
               </div>
             </div>
-            <p
-              className="font-normal text-[18px] lg:text-[24px] cursor-pointer"
-              onClick={() => navigate(`/profile/edit`)}
+          </div>
+          <div className="flex flex-col gap-8 lg:items-end">
+            <div
+              className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
+              onClick={() => navigate(`/profile/info`)}
             >
-              Edit
-            </p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Joined
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                Jun 5, 2024
-              </p>
+              <p className="font-bold text-[18px]">Profile</p>
+              <img src={arrow} alt="" />
             </div>
-            <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Expires
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                Dec 10, 2024
-              </p>
+            <div
+              className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
+              onClick={() => navigate(`/profile/bookings`)}
+            >
+              <p className="font-bold text-[18px]">Bookings</p>
+              <img src={arrow} alt="" />
             </div>
-            <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Phone
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                07087212710
-              </p>
-            </div>
-            <div className="flex">
-              <p className="w-[30%] font-normal text-[18px] lg:text-[24px]">
-                Email
-              </p>
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                faruqade32@gmail.com
-              </p>
+            <div
+              className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
+              onClick={() => navigate(`/profile/payments`)}
+            >
+              <p className="font-bold text-[18px]">Payment</p>
+              <img src={arrow} alt="" />
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-8 lg:items-end">
-          <div
-            className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
-            onClick={() => navigate(`/profile/info`)}
-          >
-            <p className="font-bold text-[18px] lg:text-[24px]">Profile</p>
-            <img src={arrow} alt="" />
-          </div>
-          <div
-            className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
-            onClick={() => navigate(`/profile/bookings`)}
-          >
-            <p className="font-bold text-[18px] lg:text-[24px]">Bookings</p>
-            <img src={arrow} alt="" />
-          </div>
-          <div
-            className="lg:w-[200px] flex justify-between items-center cursor-pointer hover:text-[#ff0000]"
-            onClick={() => navigate(`/profile/payments`)}
-          >
-            <p className="font-bold text-[18px] lg:text-[24px]">Payment</p>
-            <img src={arrow} alt="" />
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

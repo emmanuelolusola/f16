@@ -10,11 +10,9 @@ const PaymentConfirm = () => {
     period: "6 months",
   };
 
-  // Get the current date
   const startDate = moment();
   const formattedStartDate = startDate.format("MMMM DD, YYYY");
 
-  // Determine the period and add to the start date accordingly
   let endDate;
   if (period === "one year") {
     endDate = moment(startDate).add(1, "year");
@@ -22,13 +20,40 @@ const PaymentConfirm = () => {
     const periodAmount = parseInt(period.split(" ")[0], 10);
     endDate = moment(startDate).add(periodAmount, "months");
   } else {
-    // Default to 6 months if the period is not recognized
     endDate = moment(startDate).add(6, "months");
   }
   const formattedEndDate = endDate.format("MMMM DD, YYYY");
 
   const scrollToTop = () => {
     window.scroll(0, 0);
+  };
+
+  const handlePaystackPayment = () => {
+    const handler = window.PaystackPop.setup({
+      key: "pk_test_b1e2478fddd4e4e88e8ce70385645700442c3a56",
+      email: localStorage.getItem("userEmail"),
+      amount: parseFloat(amount.replace("$", "")) * 100,
+      currency: "NGN",
+      text: "Pay Now",
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Plan",
+            variable_name: "Plan",
+            value: period,
+          },
+        ],
+      },
+      callback: (response) => {
+        console.log("Payment successful: ", response);
+        navigate(`/menu`);
+      },
+      onClose: () => {
+        console.log("Payment process was closed");
+      },
+    });
+
+    handler.openIframe();
   };
 
   return (
@@ -90,7 +115,10 @@ const PaymentConfirm = () => {
             </p>
           </div>
         </div>
-        <button className="w-full h-[74px] text-[18px] font-bold bg-black text-white">
+        <button
+          className="w-full h-[74px] text-[18px] font-bold bg-black text-white"
+          onClick={handlePaystackPayment}
+        >
           Pay {amount}
         </button>
       </div>

@@ -110,99 +110,99 @@ const HomeNew = () => {
   };
 
   return (
-    <div className="w-full h-full py-[10px] lg:py-[20px]">
-      <div className="w-full fixed top-0 lg:top-[50px] flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p
-          className="font-bold text-[18px] lg:text-[24px]"
-          onClick={() => {
-            navigate(`/`);
-            scrollToTop();
-          }}
-        >
-          16/16
-        </p>
-        <Link to="/menu">
-          <button className="font-normal text-[18px] lg:text-[24px]">
-            Menu
-          </button>
-        </Link>
-      </div>
-      <HomeLanding />
+    <div className="w-full">
       <div
-        className="h-[66px] w-full bg-[#0a0a0a] fixed bottom-0 lg:top-0 z-50 flex justify-between items-center px-[24px] lg:px-[96px] cursor-pointer"
+        className="hidden md:flex h-[66px] w-full bg-[#0a0a0a] justify-between items-center px-[24px] lg:px-[96px] cursor-pointer"
         onClick={() => {
           navigate(`/membership`);
           scrollToTop();
         }}
       >
-        <p className="font-normal text-[18px] lg:text-[24px] text-white">
-          Memberships open
-        </p>
-        <p className="font-bold text-[18px] lg:text-[24px] text-white">Apply</p>
+        <p className="font-normal text-[18px] text-white">Memberships open</p>
+        <p className="font-normal text-[18px] text-white">Apply</p>
       </div>
-
-      <div className="bg-white sticky justify-center w-full top-4 lg:top-[90px] pt-[10px] lg:pt-[5px] px-[24px] lg:px-[96px]">
-        <div className="w-full flex justify-between items-center mt-[40px]">
-          <p className="font-bold text-[18px] lg:text-[24px]">Calendar</p>
-          <p className="font-normal text-[18px] lg:text-[24px]">
-            {currentTitle}
+      <div className="w-full h-full py-[10px] lg:py-[10px]">
+        <div className="w-full fixed md:sticky top-0  flex justify-between items-center py-[15px] lg:pb-0 lg:py-[20px] px-[24px] lg:px-[96px] bg-white z-10">
+          <p
+            className="font-bold text-[18px] cursor-pointer"
+            onClick={() => {
+              navigate(`/`);
+              scrollToTop();
+            }}
+          >
+            16/16
           </p>
+          <Link to="/menu">
+            <button className="font-normal text-[18px]">Menu</button>
+          </Link>
         </div>
-        <hr className="mt-[20px] opacity-30" />
-      </div>
+        <HomeLanding />
+        <div
+          className="sm:hidden h-[66px] w-full bg-[#0a0a0a] fixed bottom-0 lg:top-0 z-50 flex justify-between items-center px-[24px] lg:px-[96px] cursor-pointer"
+          onClick={() => {
+            navigate(`/membership`);
+            scrollToTop();
+          }}
+        >
+          <p className="font-normal text-[18px] text-white">Memberships open</p>
+          <p className="font-normal text-[18px] text-white">Apply</p>
+        </div>
 
-      <div className="pb-[50px]">
-        {loading ? (
-          <div className="w-full text-center p-[40px]">
-            <div className="font-normal text-[18px] lg:text-[24px]">
-              Loading...
-            </div>
+        <div className="bg-white sticky justify-center w-full top-4 pt-[10px] lg:pt-[5px] px-[24px] lg:px-[96px]">
+          <div className="w-full flex justify-between items-center mt-[40px]">
+            <p className="font-bold text-[18px]">Calendar</p>
+            <p className="font-normal text-[18px]">{currentTitle}</p>
           </div>
-        ) : eventsList.length === 0 ? (
-          <div className="w-full text-center p-[40px]">
-            <div className="font-normal text-[18px] lg:text-[24px]">
-              No events available
-            </div>
-          </div>
-        ) : (
-          sortedEventsList.map((event, index) => (
-            <div
-              className="mt-[30px] lg:mt-[60px] lg:w-[600px] px-[24px] lg:px-0 flex flex-col gap-4 lg:gap-4 pb-[20px] lg:pb-0 lg:mx-auto"
-              key={index}
-              id={event.ID}
-            >
-              <p className="font-bold text-[18px] lg:text-[24px]">
-                {event.Name}
-              </p>
-              <img
-                src={event.Poster[0].url}
-                alt=""
-                onClick={() => navigate(`/event/${event.ID}`)}
-                className="cursor-pointer"
-              />
+          <hr className="mt-[20px] opacity-30" />
+        </div>
 
-              {currentMoment.isSameOrBefore(event.EndDate)}
-              {event.RSVP === true &&
-              currentMoment.isSameOrBefore(event.EndDate) ? (
-                <NavLink
-                  to={{ pathname: `/event/${event.ID}` }}
-                  state={event}
-                  className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0A0A0A] text-[18px] lg:text-[24px] font-bold flex justify-center items-center"
-                >
-                  RSVP
-                </NavLink>
-              ) : currentMoment.isAfter(event.EndDate) ? (
-                <div className="w-full h-[66px] border border-[#FF3131] text-[#FF3131] text-[18px] lg:text-[24px] font-bold flex justify-center items-center">
-                  Closed
-                </div>
-              ) : (
-                <div className="w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] lg:text-[24px] font-bold flex justify-center items-center">
-                  Sold out
-                </div>
-              )}
+        <div className="pb-[50px]">
+          {loading ? (
+            <div className="w-full text-center p-[40px]">
+              <div className="font-normal text-[18px]">Loading...</div>
             </div>
-          ))
-        )}
+          ) : eventsList.length === 0 ? (
+            <div className="w-full text-center p-[40px]">
+              <div className="font-normal text-[18px]">No events available</div>
+            </div>
+          ) : (
+            sortedEventsList.map((event, index) => (
+              <div
+                className="mt-[30px] lg:mt-[60px] lg:w-[600px] px-[24px] lg:px-0 flex flex-col gap-4 lg:gap-4 pb-[20px] lg:pb-0 lg:mx-auto"
+                key={index}
+                id={event.ID}
+              >
+                <p className="font-bold text-[18px]">{event.Name}</p>
+                <img
+                  src={event.Poster[0].url}
+                  alt=""
+                  onClick={() => navigate(`/event/${event.ID}`)}
+                  className="cursor-pointer"
+                />
+
+                {currentMoment.isSameOrBefore(event.EndDate)}
+                {event.RSVP === true &&
+                currentMoment.isSameOrBefore(event.EndDate) ? (
+                  <NavLink
+                    to={{ pathname: `/event/${event.ID}` }}
+                    state={event}
+                    className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0A0A0A] text-[18px] font-bold flex justify-center items-center"
+                  >
+                    RSVP
+                  </NavLink>
+                ) : currentMoment.isAfter(event.EndDate) ? (
+                  <div className="w-full h-[66px] border border-[#FF3131] text-[#FF3131] text-[18px] font-bold flex justify-center items-center">
+                    Closed
+                  </div>
+                ) : (
+                  <div className="w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] font-bold flex justify-center items-center">
+                    Sold out
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
