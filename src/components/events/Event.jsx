@@ -176,6 +176,7 @@ const Event = (props) => {
       Type: "event",
       "Payment Reference": paymentReference,
       Phone: phone,
+      Venue: event.Address,
     };
 
     try {

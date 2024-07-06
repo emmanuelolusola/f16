@@ -39,7 +39,6 @@ const PaymentConfirm = () => {
         custom_fields: [
           {
             display_name: "Plan",
-            variable_name: "Plan",
             value: period,
           },
         ],
