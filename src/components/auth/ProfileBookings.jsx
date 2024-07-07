@@ -44,12 +44,12 @@ const ProfileBookings = () => {
   };
 
   const today = new Date();
-  // const filteredAndSortedBookings = bookings
-  //   .filter((booking) => {
-  //     const bookingDate = new Date(booking.day);
-  //     return bookingDate.setHours(0, 0, 0, 0) >= today.setHours(0, 0, 0, 0);
-  //   })
-  //   .sort((a, b) => new Date(a.day) - new Date(b.day));
+  const filteredAndSortedBookings = bookings
+    .filter((booking) => {
+      const bookingDate = new Date(booking.day);
+      return bookingDate.setHours(0, 0, 0, 0) >= today.setHours(0, 0, 0, 0);
+    })
+    .sort((a, b) => new Date(a.day) - new Date(b.day));
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -68,6 +68,7 @@ const ProfileBookings = () => {
               event: booking.fields.Event,
               day: booking.fields.Date,
               timeslot: booking.fields["Time Slot"],
+              venue: booking.fields.Venue,
             }));
             setBookings(transformedBookings);
           }
@@ -123,7 +124,7 @@ const ProfileBookings = () => {
             <p className="text-[18px] font-bold ">Bookings</p>
           </div>
           <div className="w-full flex flex-col gap-4">
-            {bookings.map((booking) => (
+            {filteredAndSortedBookings.map((booking) => (
               <div
                 key={booking.id}
                 className="w-full border-b border-[#E0E0E0]"
@@ -150,6 +151,9 @@ const ProfileBookings = () => {
                     </p>
                     <p className="w-full text-[18px] font-normal ">
                       {booking.timeslot}
+                    </p>
+                    <p className="w-full text-[18px] font-normal ">
+                      {booking.venue}
                     </p>
                   </div>
                 )}
