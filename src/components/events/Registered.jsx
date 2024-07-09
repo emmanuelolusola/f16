@@ -122,6 +122,7 @@ const Registered = () => {
       "Payment Reference":
         event.price > 0 ? new Date().getTime().toString() : null,
       Phone: phone,
+      Venue: event.venue,
     };
 
     try {
@@ -131,7 +132,7 @@ const Registered = () => {
       setLoading(false);
 
       navigate(
-        `/event/${id}/registered?email=${email}&name=${event.name}&time=${event.time}&date=${selectedDate}&address=${event.address}&imgUrl=${event.imgUrl}&starts=${event.starts}&ends=${event.ends}&type=${event.type}&rsvp=${event.rsvp}&price=${event.price}`
+        `/event/${id}/registered?email=${email}&name=${event.name}&time=${event.time}&date=${selectedDate}&address=${event.address}&imgUrl=${event.imgUrl}&starts=${event.starts}&ends=${event.ends}&type=${event.type}&rsvp=${event.rsvp}&price=${event.price}&venue=${event.venue}`
       );
       window.location.reload();
     } catch (error) {

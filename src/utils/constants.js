@@ -26,7 +26,7 @@ export const PAYMENT = [
   {
     id: 2,
     amount: "$250",
-    period: "one year",
+    period: "12 months",
   },
 ];
 

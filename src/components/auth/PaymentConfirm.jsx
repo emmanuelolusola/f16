@@ -45,7 +45,32 @@ const PaymentConfirm = () => {
       },
       callback: (response) => {
         console.log("Payment successful: ", response);
-        navigate(`/menu`);
+
+        const postData = {
+          Reference: response.reference,
+          Account: [localStorage.getItem("userID")],
+          Product: period,
+          "Created At": response.transaction_date,
+        };
+
+        fetch(
+          "https://friendsof16api.up.railway.app/api/payments/create-payment",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Payment data saved:", data);
+            navigate(`/menu`);
+          })
+          .catch((error) => {
+            console.error("Error saving payment data:", error);
+          });
       },
       onClose: () => {
         console.log("Payment process was closed");

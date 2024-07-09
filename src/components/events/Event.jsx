@@ -26,15 +26,12 @@ const Event = (props) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState(localStorage.getItem("email") ?? "");
-
   const [name, setName] = useState(localStorage.getItem("name") ?? "");
-
   const [phone, setPhone] = useState(localStorage.getItem("phone") ?? "");
 
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(null);
-
   const [selectedTime, setSelectedTime] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -80,8 +77,6 @@ const Event = (props) => {
     }
     return dates;
   }, [event]);
-
-  console.log(dates);
 
   const transactionConfig = {
     publicKey: "pk_live_93613975cae618d43662167ee9c54cf063bdd6ed",
@@ -166,8 +161,12 @@ const Event = (props) => {
 
   const addBooking = async (paymentReference) => {
     const data = {
-      Email: email,
-      Name: name,
+      Email: localStorage.getItem("userID")
+        ? localStorage.getItem("userEmail")
+        : email,
+      Name: localStorage.getItem("userID")
+        ? localStorage.getItem("userName")
+        : name,
       Event: event.Name,
       Date: selectedDate,
       Amount: event.Price > 0 ? event.Price : null,
@@ -185,15 +184,21 @@ const Event = (props) => {
       console.log(res);
       setLoading(false);
 
-      navigate(
-        `/event/${event.ID}/registered?email=${email}&name=${event.Name}&time=${
-          event.TimeSlots
-        }&date=${selectedDate}&address=${event.Address}&imgUrl=${
-          event.Poster[0].url
-        }&starts=${event.StartDate}&ends=${
-          event.EndDate
-        }&type=${"event"}&rsvp=${event.RSVP}&price=${event.Price}`
-      );
+      if (localStorage.getItem("userID")) {
+        navigate(`/profile/bookings`);
+      } else {
+        navigate(
+          `/event/${event.ID}/registered?email=${email}&name=${
+            event.Name
+          }&time=${event.TimeSlots}&date=${selectedDate}&address=${
+            event.Address
+          }&imgUrl=${event.Poster[0].url}&starts=${event.StartDate}&ends=${
+            event.EndDate
+          }&type=${"event"}&rsvp=${event.RSVP}&price=${event.Price}&venue=${
+            event.Address
+          }`
+        );
+      }
     } catch (error) {
       setLoading(false);
       error;
@@ -319,7 +324,7 @@ const Event = (props) => {
           onClose={toggleDrawer}
           direction="bottom"
           className="w-full px-[24px] pt-[26px] pb-[48px] overflow-y-auto"
-          size={event.StartDate === event.EndDate ? 590 : 620}
+          size={localStorage.getItem("userID") ? 420 : 620}
         >
           <div className="w-full flex flex-col gap-[26px]">
             <p className="text-[18px] font-bold">RSVP</p>
@@ -360,26 +365,30 @@ const Event = (props) => {
                 />
               </div>
             ) : null}
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Name</p>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Email Address</p>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Name</p>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Email Address</p>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Phone Number</p>
               <input
@@ -390,17 +399,22 @@ const Event = (props) => {
                 className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
               />
             </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                id="remember-me"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(!rememberMe)}
-              />
-              <label htmlFor="remember-me" className="text-[18px] font-normal">
-                Remember me
-              </label>
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(!rememberMe)}
+                />
+                <label
+                  htmlFor="remember-me"
+                  className="text-[18px] font-normal"
+                >
+                  Remember me
+                </label>
+              </div>
+            )}
             {loading ? (
               <button
                 disabled
@@ -408,6 +422,14 @@ const Event = (props) => {
                 onClick={handleButtonClick}
               >
                 Please wait
+              </button>
+            ) : localStorage.getItem("userID") ? (
+              <button
+                disabled={loading}
+                className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                onClick={handleButtonClick}
+              >
+                {event?.Price > 0 ? "Buy Ticket" : "Get Ticket"}
               </button>
             ) : (
               <button
