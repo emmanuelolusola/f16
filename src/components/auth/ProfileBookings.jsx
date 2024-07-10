@@ -83,6 +83,10 @@ const ProfileBookings = () => {
     fetchUserData();
   }, []);
 
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
@@ -124,41 +128,47 @@ const ProfileBookings = () => {
             <p className="text-[18px] font-bold ">Bookings</p>
           </div>
           <div className="w-full flex flex-col gap-4">
-            {filteredAndSortedBookings.map((booking) => (
-              <div
-                key={booking.id}
-                className="w-full border-b border-[#E0E0E0]"
-              >
-                <div
-                  className="p-4 flex justify-between items-center gap-4"
-                  onClick={() => toggleExpand(booking.id)}
-                >
-                  <p className="w-full text-[18px] font-bold cursor-pointer">
-                    {booking.event}
-                  </p>
-                  <img
-                    src={arrow}
-                    alt="arrow"
-                    className={`cursor-pointer transform transition-transform duration-200 ${
-                      expandedBookingId === booking.id ? "rotate-90" : ""
-                    }`}
-                  />
-                </div>
-                {expandedBookingId === booking.id && (
-                  <div className="px-4 pt-0 pb-4 flex flex-col gap-2">
-                    <p className="w-full text-[18px] font-normal ">
-                      {formatDate(booking.day)}
-                    </p>
-                    <p className="w-full text-[18px] font-normal ">
-                      {booking.timeslot}
-                    </p>
-                    <p className="w-full text-[18px] font-normal ">
-                      {booking.venue}
-                    </p>
-                  </div>
-                )}
+            {filteredAndSortedBookings.length === 0 ? (
+              <div className="flex justify-center items-center w-full h-[80vh]">
+                <p className="text-[18px]">No Bookings Available</p>
               </div>
-            ))}
+            ) : (
+              filteredAndSortedBookings.map((booking) => (
+                <div
+                  key={booking.id}
+                  className="w-full border-b border-[#E0E0E0]"
+                >
+                  <div
+                    className="p-4 flex justify-between items-center gap-4"
+                    onClick={() => toggleExpand(booking.id)}
+                  >
+                    <p className="w-full text-[18px] font-bold cursor-pointer">
+                      {booking.event}
+                    </p>
+                    <img
+                      src={arrow}
+                      alt="arrow"
+                      className={`cursor-pointer transform transition-transform duration-200 ${
+                        expandedBookingId === booking.id ? "rotate-90" : ""
+                      }`}
+                    />
+                  </div>
+                  {expandedBookingId === booking.id && (
+                    <div className="px-4 pt-0 pb-4 flex flex-col gap-2">
+                      <p className="w-full text-[18px] font-normal ">
+                        {formatDate(booking.day)}
+                      </p>
+                      <p className="w-full text-[18px] font-normal ">
+                        {booking.timeslot}
+                      </p>
+                      <p className="w-full text-[18px] font-normal ">
+                        {booking.venue}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}

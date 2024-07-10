@@ -97,8 +97,12 @@ const Coworking = () => {
 
   const handleButtonClick = async () => {
     const data = {
-      Email: email,
-      Name: name,
+      Email: localStorage.getItem("userID")
+        ? localStorage.getItem("userEmail")
+        : email,
+      Name: localStorage.getItem("userID")
+        ? localStorage.getItem("userName")
+        : name,
       Event: "Co-working",
       Date: selectedDay,
       Amount: null,
@@ -106,7 +110,9 @@ const Coworking = () => {
       "Paid with": null,
       Type: "co-working",
       "Payment Reference": null,
-      Phone: phone,
+      Phone: localStorage.getItem("userID")
+        ? localStorage.getItem("userNumber")
+        : phone,
     };
     try {
       setLoading(true);
@@ -114,9 +120,13 @@ const Coworking = () => {
       console.log(res);
       setLoading(false);
 
-      navigate(
-        `/booked-coworking?email=${email}&name=${name}&time=${selectedHour}&day=${selectedDay}&type=${"coworking"}&phone=${phone}`
-      );
+      if (localStorage.getItem("userID")) {
+        navigate(`/profile/bookings`);
+      } else {
+        navigate(
+          `/booked-coworking?email=${email}&name=${name}&time=${selectedHour}&day=${selectedDay}&type=${"coworking"}&phone=${phone}`
+        );
+      }
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -127,10 +137,22 @@ const Coworking = () => {
     (space) => space.Coworking !== null
   );
 
+  const scrollToTop = () => {
+    window.scroll(0, 0);
+  };
+
   return (
     <div className="w-full h-[100dvh] lg:h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
-        <p className="font-bold text-[18px] cursor-pointer">16/16</p>
+        <p
+          className="font-bold text-[18px] cursor-pointer"
+          onClick={() => {
+            navigate(`/`);
+            scrollToTop();
+          }}
+        >
+          16/16
+        </p>
         <p
           className="font-normal text-[18px] cursor-pointer"
           onClick={() => navigate(`/menu`)}
@@ -190,7 +212,7 @@ const Coworking = () => {
           onClose={toggleDrawer}
           direction="bottom"
           className="w-full px-[24px] pt-[26px] pb-[48px] overflow-y-auto"
-          size={560}
+          size={420}
         >
           <div className="w-full flex flex-col gap-[26px]">
             <p className="text-[18px] font-bold">Book co-working</p>
@@ -228,36 +250,42 @@ const Coworking = () => {
                 }}
               />
             </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Name</p>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Email Address</p>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Phone Number</p>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={handlePhoneChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Name</p>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Email Address</p>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Phone Number</p>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
             {loading ? (
               <button
                 disabled
@@ -268,9 +296,7 @@ const Coworking = () => {
               </button>
             ) : (
               <button
-                disabled={
-                  !isEmailValid || !name || !selectedDay || !selectedHour
-                }
+                disabled={!selectedDay || !selectedHour}
                 className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 onClick={handleButtonClick}
               >
@@ -317,36 +343,42 @@ const Coworking = () => {
                 }}
               />
             </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Name</p>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-                className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Email Address</p>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Phone Number</p>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={handlePhoneChange}
-                className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Name</p>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Email Address</p>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Phone Number</p>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  className="w-full h-[64px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
             {loading ? (
               <button
                 disabled
@@ -357,9 +389,7 @@ const Coworking = () => {
               </button>
             ) : (
               <button
-                disabled={
-                  !isEmailValid || !name || !selectedDay || !selectedHour
-                }
+                disabled={!selectedDay || !selectedHour}
                 className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
                 onClick={handleButtonClick}
               >

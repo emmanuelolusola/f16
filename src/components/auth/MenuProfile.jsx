@@ -13,6 +13,7 @@ const MenuProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState("Inactive");
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
@@ -55,8 +56,17 @@ const MenuProfile = () => {
           if (data.status === "success") {
             setUserData(data.account);
           }
+
+          // Fetch payment status
+          const paymentResponse = await fetch(
+            `https://friendsof16api.up.railway.app/api/payments/${userId}`
+          );
+
+          if (paymentResponse.status === 200) {
+            setPaymentStatus("Active");
+          }
         } catch (error) {
-          console.error("Failed to fetch user data:", error);
+          console.error("Failed to fetch user data or payment status:", error);
         } finally {
           setLoading(false);
         }
@@ -110,12 +120,16 @@ const MenuProfile = () => {
             <div className="w-full flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
-                  <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+                  {paymentStatus === "Active" ? (
+                    <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#47CD89] rounded-full"></div>
+                  ) : (
+                    <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-0">
                   <p className="font-bold text-[18px]">{userData.Name}</p>
 
-                  <p className="font-normal text-[18px]">Inactive</p>
+                  <p className="font-normal text-[18px]">{paymentStatus}</p>
                 </div>
               </div>
               <img src={arrow} alt="" className="cursor-pointer" />

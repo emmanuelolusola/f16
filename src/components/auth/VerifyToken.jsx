@@ -21,12 +21,13 @@ const VerifyToken = () => {
     ).json();
 
     if (response.status === "success") {
-      const { id, email, name } = response.user;
+      const { id, email, name, phoneNumber } = response.user;
 
       localStorage.setItem("user", JSON.stringify(response.user));
       localStorage.setItem("userID", id);
       localStorage.setItem("userEmail", email);
       localStorage.setItem("userName", name);
+      localStorage.setItem("userNumber", phoneNumber);
 
       setIsValid(true);
     } else {

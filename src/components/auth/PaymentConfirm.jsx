@@ -27,6 +27,8 @@ const PaymentConfirm = () => {
   const scrollToTop = () => {
     window.scroll(0, 0);
   };
+  console.log(typeof localStorage.getItem("userID"));
+  console.log(localStorage.getItem("userID"));
 
   const handlePaystackPayment = () => {
     const handler = window.PaystackPop.setup({

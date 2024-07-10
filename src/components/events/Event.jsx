@@ -174,7 +174,9 @@ const Event = (props) => {
       "Paid with": event.Price > 0 ? "paystack" : null,
       Type: "event",
       "Payment Reference": paymentReference,
-      Phone: phone,
+      Phone: localStorage.getItem("userID")
+        ? localStorage.getItem("userNumber")
+        : phone,
       Venue: event.Address,
     };
 
@@ -324,7 +326,7 @@ const Event = (props) => {
           onClose={toggleDrawer}
           direction="bottom"
           className="w-full px-[24px] pt-[26px] pb-[48px] overflow-y-auto"
-          size={localStorage.getItem("userID") ? 420 : 620}
+          size={localStorage.getItem("userID") ? 310 : 620}
         >
           <div className="w-full flex flex-col gap-[26px]">
             <p className="text-[18px] font-bold">RSVP</p>
@@ -389,16 +391,18 @@ const Event = (props) => {
                 />
               </div>
             )}
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Phone Number</p>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={handlePhoneChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Phone Number</p>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
             {!localStorage.getItem("userID") && (
               <div className="flex gap-2 items-center">
                 <input
@@ -485,47 +489,58 @@ const Event = (props) => {
                 />
               </div>
             ) : null}
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Name</p>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Email Address</p>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-0">
-              <p className="text-[18px] font-normal">Phone Number</p>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={handlePhoneChange}
-                className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
-              />
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                id="remember-me"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(!rememberMe)}
-              />
-              <label htmlFor="remember-me" className="text-[18px] font-normal">
-                Remember me
-              </label>
-            </div>
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Name</p>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Email Address</p>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="w-full flex flex-col gap-0">
+                <p className="text-[18px] font-normal">Phone Number</p>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  className="w-full h-[56px] border border-[#0a0a0a50] bg-white text-[#0A0A0A] text-[18px] px-[12px] py-[10px]"
+                />
+              </div>
+            )}
+            {!localStorage.getItem("userID") && (
+              <div className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(!rememberMe)}
+                />
+                <label
+                  htmlFor="remember-me"
+                  className="text-[18px] font-normal"
+                >
+                  Remember me
+                </label>
+              </div>
+            )}
             {loading ? (
               <button
                 disabled
@@ -533,6 +548,14 @@ const Event = (props) => {
                 onClick={handleButtonClick}
               >
                 Please wait
+              </button>
+            ) : localStorage.getItem("userID") ? (
+              <button
+                disabled={loading}
+                className="w-full h-[74px] text-[18px] font-bold bg-black text-white disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+                onClick={handleButtonClick}
+              >
+                {event?.Price > 0 ? "Buy Ticket" : "Get Ticket"}
               </button>
             ) : (
               <button

@@ -5,6 +5,8 @@ import arrow from "../../assets/arrow_forward_ios.svg";
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState("Inactive");
+
   const navigate = useNavigate();
   const scrollToTop = () => {
     window.scroll(0, 0);
@@ -23,8 +25,16 @@ const Profile = () => {
           if (data.status === "success") {
             setUserData(data.account);
           }
+
+          const paymentResponse = await fetch(
+            `https://friendsof16api.up.railway.app/api/payments/${userId}`
+          );
+
+          if (paymentResponse.status === 200) {
+            setPaymentStatus("Active");
+          }
         } catch (error) {
-          console.error("Failed to fetch user data:", error);
+          console.error("Failed to fetch user data or payment status:", error);
         } finally {
           setLoading(false);
         }
@@ -75,11 +85,15 @@ const Profile = () => {
             <div className="w-full flex justify-between items-start">
               <div className="flex gap-2">
                 <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
-                  <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+                  {paymentStatus === "Active" ? (
+                    <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#47CD89] rounded-full"></div>
+                  ) : (
+                    <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-0">
                   <p className="font-bold text-[18px]">{userData.Name}</p>
-                  <p className="font-normal text-[18px]">Inactive</p>
+                  <p className="font-normal text-[18px]">{paymentStatus}</p>
                 </div>
               </div>
               {/* <p
@@ -112,7 +126,7 @@ const Profile = () => {
               </div>
               <div className="flex justify-between gap-10">
                 <p className=" font-normal text-[18px]">Email</p>
-                <p className="w-[50%] lg:w-[80%] font-bold text-[18px] break-all text-end">
+                <p className="w-[70%] lg:w-[80%] font-bold text-[18px] break-all text-end">
                   {userData["Email Address (from Application)"][0]}
                 </p>
               </div>

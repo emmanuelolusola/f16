@@ -50,7 +50,15 @@ function App() {
             element={<ApplicationReceived />}
             exact
           />
-          <Route path="/co-working" element={<Coworking />} exact />
+          <Route
+            path="/co-working"
+            element={
+              <ProtectedRoute>
+                <Coworking />
+              </ProtectedRoute>
+            }
+            exact
+          />
           <Route path="/booked-coworking" element={<BookedCoworking />} exact />
           <Route path="/about" element={<About />} exact />
           <Route path="/event/:id" element={<Event />} exact />
