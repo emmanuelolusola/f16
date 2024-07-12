@@ -252,7 +252,9 @@ const Event = (props) => {
           <img src={event.Poster[0].url} alt="" className="w-full" />
         ) : null}
         <div className="flex flex-col gap-4">
-          {currentMoment.isSameOrBefore(event.EndDate) ? (
+          {currentMoment.isSameOrBefore(event.EndDate)}
+          {event.RSVP === true &&
+          currentMoment.isSameOrBefore(event.EndDate) ? (
             <button
               className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold"
               onClick={toggleDrawer}

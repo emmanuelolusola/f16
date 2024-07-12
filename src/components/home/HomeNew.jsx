@@ -109,6 +109,8 @@ const HomeNew = () => {
     window.scroll(0, 0);
   };
 
+  const userID = localStorage.getItem("userID");
+
   return (
     <div className="w-full">
       <div
@@ -166,41 +168,46 @@ const HomeNew = () => {
               <div className="font-normal text-[18px]">No events available</div>
             </div>
           ) : (
-            sortedEventsList.map((event, index) => (
-              <div
-                className="mt-[30px] lg:mt-[60px] lg:w-[600px] px-[24px] lg:px-0 flex flex-col gap-4 lg:gap-4 pb-[20px] lg:pb-0 lg:mx-auto"
-                key={index}
-                id={event.ID}
-              >
-                <p className="font-bold text-[18px]">{event.Name}</p>
-                <img
-                  src={event.Poster[0].url}
-                  alt=""
-                  onClick={() => navigate(`/event/${event.ID}`)}
-                  className="cursor-pointer"
-                />
+            sortedEventsList.map((event, index) => {
+              if (event["Members-only"] && !userID) {
+                return null;
+              }
 
-                {currentMoment.isSameOrBefore(event.EndDate)}
-                {event.RSVP === true &&
-                currentMoment.isSameOrBefore(event.EndDate) ? (
-                  <NavLink
-                    to={{ pathname: `/event/${event.ID}` }}
-                    state={event}
-                    className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0A0A0A] text-[18px] font-bold flex justify-center items-center"
-                  >
-                    RSVP
-                  </NavLink>
-                ) : currentMoment.isAfter(event.EndDate) ? (
-                  <div className="w-full h-[66px] border border-[#FF3131] text-[#FF3131] text-[18px] font-bold flex justify-center items-center">
-                    Closed
-                  </div>
-                ) : (
-                  <div className="w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] font-bold flex justify-center items-center">
-                    Sold out
-                  </div>
-                )}
-              </div>
-            ))
+              return (
+                <div
+                  className="mt-[30px] lg:mt-[60px] lg:w-[600px] px-[24px] lg:px-0 flex flex-col gap-4 lg:gap-4 pb-[20px] lg:pb-0 lg:mx-auto"
+                  key={index}
+                  id={event.ID}
+                >
+                  <p className="font-bold text-[18px]">{event.Name}</p>
+                  <img
+                    src={event.Poster[0].url}
+                    alt=""
+                    onClick={() => navigate(`/event/${event.ID}`)}
+                    className="cursor-pointer"
+                  />
+                  {currentMoment.isSameOrBefore(event.EndDate)}
+                  {event.RSVP === true &&
+                  currentMoment.isSameOrBefore(event.EndDate) ? (
+                    <NavLink
+                      to={{ pathname: `/event/${event.ID}` }}
+                      state={event}
+                      className="w-full h-[66px] border border-[#0a0a0a] bg-white text-[#0A0A0A] text-[18px] font-bold flex justify-center items-center"
+                    >
+                      RSVP
+                    </NavLink>
+                  ) : currentMoment.isAfter(event.EndDate) ? (
+                    <div className="w-full h-[66px] border border-[#FF3131] text-[#FF3131] text-[18px] font-bold flex justify-center items-center">
+                      Closed
+                    </div>
+                  ) : (
+                    <div className="w-full h-[66px] border border-[#e1e1e1] text-[#bebebe] text-[18px] font-bold flex justify-center items-center">
+                      Sold out
+                    </div>
+                  )}
+                </div>
+              );
+            })
           )}
         </div>
       </div>

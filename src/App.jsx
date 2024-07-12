@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import ScrollToTopOnRouteChange from "./ScrollToTopOnRouteChange";
 import HomeNew from "./components/home/HomeNew";
 import Menu from "./components/menu/Menu";
@@ -42,6 +47,11 @@ function App() {
           <Route
             path="/membership/application"
             element={<MembershipApplication />}
+            exact
+          />
+          <Route
+            path="/invites/:code"
+            element={<Navigate to="/membership/application" />}
             exact
           />
           <Route path="/membership/about" element={<MembershipAbout />} exact />

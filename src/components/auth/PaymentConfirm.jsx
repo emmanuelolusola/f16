@@ -53,6 +53,9 @@ const PaymentConfirm = () => {
           Account: [localStorage.getItem("userID")],
           Product: period,
           "Created At": response.transaction_date,
+          "Start Date": formattedStartDate,
+          "End Date": formattedEndDate,
+          Amount: amount,
         };
 
         fetch(

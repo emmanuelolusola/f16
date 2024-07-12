@@ -6,10 +6,43 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [paymentStatus, setPaymentStatus] = useState("Inactive");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const navigate = useNavigate();
   const scrollToTop = () => {
     window.scroll(0, 0);
+  };
+
+  const getOrdinalSuffix = (day) => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const today = new Date();
+
+    // if (date.toDateString() === today.toDateString()) {
+    //   return "Today";
+    // }
+
+    const day = date.getDate();
+    const suffix = getOrdinalSuffix(day);
+    const options = { weekday: "long", month: "long", year: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-GB", options);
+
+    const [weekday, month, year] = formattedDate.split(" ");
+    return `${weekday} ${day}, ${month}`;
   };
 
   useEffect(() => {
@@ -29,9 +62,16 @@ const Profile = () => {
           const paymentResponse = await fetch(
             `https://friendsof16api.up.railway.app/api/payments/${userId}`
           );
-
-          if (paymentResponse.status === 200) {
+          if (paymentResponse.status !== 200) {
+            // const paymentData = await paymentResponse.json();
+            setPaymentStatus("Inactive");
+            setStartDate("");
+            setEndDate("");
+          } else {
+            const paymentData = await paymentResponse.json();
             setPaymentStatus("Active");
+            setStartDate(paymentData.payment.fields["Start Date"]);
+            setEndDate(paymentData.payment.fields["End Date"]);
           }
         } catch (error) {
           console.error("Failed to fetch user data or payment status:", error);
@@ -107,15 +147,15 @@ const Profile = () => {
               <div className="flex justify-between gap-10">
                 <p className="font-normal text-[18px]">Joined</p>
                 <p className="font-bold text-[18px]">
-                  {/* Payment Info not added yet */}
-                  {userData.Name}
+                  {paymentStatus === "Active"
+                    ? formatDate(startDate)
+                    : startDate}
                 </p>
               </div>
               <div className="flex justify-between gap-10">
                 <p className="font-normal text-[18px]">Expires</p>
                 <p className="font-bold text-[18px]">
-                  {/* Payment Info not added yet */}
-                  {userData.Name}
+                  {paymentStatus === "Active" ? formatDate(endDate) : endDate}
                 </p>
               </div>
               <div className="flex justify-between gap-10">
