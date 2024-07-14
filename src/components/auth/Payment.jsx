@@ -20,6 +20,12 @@ const Payment = () => {
           const data = await response.json();
           if (data.status === "success") {
             setUserData(data.account);
+            const paymentResponse = await fetch(
+              `https://friendsof16api.up.railway.app/api/payments/${userId}`
+            );
+            if (paymentResponse.ok) {
+              navigate("/menu");
+            }
           }
         } catch (error) {
           console.error("Failed to fetch user data:", error);
@@ -30,7 +36,7 @@ const Payment = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   const scrollToTop = () => {
     window.scroll(0, 0);

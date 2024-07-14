@@ -11,21 +11,16 @@ const Tour = () => {
   const tips = [
     {
       id: 1,
-      text: "Use “Edit” to quickly change information like your name and phone number. You can also add a profile picture to your profile",
-      highlight: "edit",
-    },
-    {
-      id: 2,
       text: "“Profile” lets you see all the details submitted during your application",
       highlight: "profile",
     },
     {
-      id: 3,
+      id: 2,
       text: "“Bookings” shows the upcoming events you have registered for",
       highlight: "bookings",
     },
     {
-      id: 4,
+      id: 3,
       text: "Go to “Payments” to see your membership plan and card details",
       highlight: "payments",
     },
@@ -50,7 +45,7 @@ const Tour = () => {
 
   const highlightClass = (section) => {
     return tips[currentTip].highlight === section
-      ? "relative z-50 bg-white px-4 py-4 faded-in border-2 border-[#ff0000]"
+      ? "relative z-50 bg-white px-4 py-4 faded-in "
       : "opacity-100";
   };
 
@@ -58,6 +53,13 @@ const Tour = () => {
     return tips[currentTip].highlight === section
       ? ""
       : "fixed inset-0 bg-black bg-opacity-50 z-40";
+  };
+
+  const getInitials = (name) => {
+    if (!name) return "";
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]).join("");
+    return initials;
   };
 
   return (
@@ -93,7 +95,8 @@ const Tour = () => {
         <div className={`lg:w-[500px] flex flex-col gap-8`}>
           <div className="w-full flex justify-between items-start">
             <div className="flex gap-2">
-              <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
+              <div className="relative w-[52px] h-[52px] bg-[#0a0a0a] rounded-full flex items-center justify-center text-[18px] font-bold text-white">
+                {getInitials("John Doe")}
                 <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#ff0000] rounded-full"></div>
               </div>
               <div className="flex flex-col gap-0">
@@ -101,7 +104,7 @@ const Tour = () => {
                 <p className="font-normal text-[18px]">Inactive</p>
               </div>
             </div>
-            <button
+            {/* <button
               className={`font-normal text-[18px] cursor-pointer ${highlightClass(
                 "edit"
               )}`}
@@ -109,7 +112,7 @@ const Tour = () => {
               disabled
             >
               Edit
-            </button>
+            </button> */}
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex">

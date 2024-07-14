@@ -76,6 +76,13 @@ const MenuProfile = () => {
     fetchUserData();
   }, []);
 
+  const getInitials = (name) => {
+    if (!name) return "";
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]).join("");
+    return initials;
+  };
+
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
       <div className="bg-white fixed w-full top-0 px-[24px] lg:px-[96px] pt-[10px]">
@@ -119,7 +126,8 @@ const MenuProfile = () => {
           >
             <div className="w-full flex justify-between items-center">
               <div className="flex gap-2">
-                <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
+                <div className="relative w-[52px] h-[52px] bg-[#0a0a0a] rounded-full flex items-center justify-center text-[18px] font-bold text-white">
+                  {getInitials(userData.Name)}
                   {paymentStatus === "Active" ? (
                     <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#47CD89] rounded-full"></div>
                   ) : (
@@ -128,7 +136,6 @@ const MenuProfile = () => {
                 </div>
                 <div className="flex flex-col gap-0">
                   <p className="font-bold text-[18px]">{userData.Name}</p>
-
                   <p className="font-normal text-[18px]">{paymentStatus}</p>
                 </div>
               </div>
@@ -154,15 +161,17 @@ const MenuProfile = () => {
             >
               About 16/16
             </p>
-            <p
-              className="font-bold text-[18px] cursor-pointer hover:text-[#FF3131]"
-              onClick={() => {
-                navigate(`/co-working`);
-                scrollToTop();
-              }}
-            >
-              Co-working
-            </p>
+            {paymentStatus === "Active" ? (
+              <p
+                className="font-bold text-[18px] cursor-pointer hover:text-[#FF3131]"
+                onClick={() => {
+                  navigate(`/co-working`);
+                  scrollToTop();
+                }}
+              >
+                Book a Spot
+              </p>
+            ) : null}
             <p
               className="font-bold text-[18px] cursor-pointer hover:text-[#FF3131]"
               onClick={() => {

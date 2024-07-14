@@ -50,8 +50,8 @@ function App() {
             exact
           />
           <Route
-            path="/invites/:code"
-            element={<Navigate to="/membership/application" />}
+            path="/memberships"
+            element={<Navigate to="/membership" />}
             exact
           />
           <Route path="/membership/about" element={<MembershipAbout />} exact />

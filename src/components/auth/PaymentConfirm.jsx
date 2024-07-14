@@ -5,8 +5,9 @@ import moment from "moment";
 const PaymentConfirm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { amount, period } = location.state || {
+  const { amount, figure, period } = location.state || {
     amount: "$150",
+    figure: 250000,
     period: "6 months",
   };
 
@@ -27,14 +28,12 @@ const PaymentConfirm = () => {
   const scrollToTop = () => {
     window.scroll(0, 0);
   };
-  console.log(typeof localStorage.getItem("userID"));
-  console.log(localStorage.getItem("userID"));
 
   const handlePaystackPayment = () => {
     const handler = window.PaystackPop.setup({
       key: "pk_test_b1e2478fddd4e4e88e8ce70385645700442c3a56",
       email: localStorage.getItem("userEmail"),
-      amount: parseFloat(amount.replace("$", "")) * 100,
+      amount: figure * 100,
       currency: "NGN",
       text: "Pay Now",
       metadata: {

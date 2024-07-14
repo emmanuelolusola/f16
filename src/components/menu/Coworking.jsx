@@ -16,7 +16,7 @@ import image from "../../assets/image.png";
 const getNextValidCoworkingDay = (date) => {
   const nextDay = moment(date).add(1, "day");
   const dayOfWeek = nextDay.day();
-  if (dayOfWeek === 0 || dayOfWeek === 6 || dayOfWeek === 1) {
+  if (dayOfWeek === 1) {
     return getNextValidCoworkingDay(nextDay);
   }
   return nextDay;
@@ -24,7 +24,7 @@ const getNextValidCoworkingDay = (date) => {
 
 let today = moment();
 
-if (today.day() === 0 || today.day() === 6 || today.day() === 1) {
+if (today.day() === 1) {
   today = getNextValidCoworkingDay(today);
 }
 
@@ -56,7 +56,6 @@ const Coworking = () => {
         setLoader(true);
         const res = await bookCoworking();
         setCoworkingData(res);
-        console.log(res);
       } catch (error) {
         console.log(error);
       } finally {
@@ -173,7 +172,7 @@ const Coworking = () => {
       ) : (
         <div className="h-[85dvh] lg:h-full px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto grid grid-col content-between gap-4 lg:gap-8">
           <div className="flex flex-col gap-4">
-            <p className="text-[18px] font-bold">Co-working at 16/16</p>
+            <p className="text-[18px] font-bold">Book a Spot</p>
             <img src={image} alt="" className="w-full pb-0" />
             <div className="w-full flex flex-col">
               <p className="font-normal text-[18px] w-full py-[12px] border-b border-black ">
@@ -215,7 +214,7 @@ const Coworking = () => {
           size={420}
         >
           <div className="w-full flex flex-col gap-[26px]">
-            <p className="text-[18px] font-bold">Book co-working</p>
+            <p className="text-[18px] font-bold">Book Now</p>
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Day</p>
               <div className="flex items-center gap-1">
@@ -308,7 +307,7 @@ const Coworking = () => {
       ) : (
         <Modal open={isOpen} onClose={toggleDrawer} center closeIcon>
           <div className="w-[700px] flex flex-col gap-[26px] p-8">
-            <p className="text-[18px] font-bold">Book co-working</p>
+            <p className="text-[18px] font-bold">Book Now</p>
             <div className="w-full flex flex-col gap-0">
               <p className="text-[18px] font-normal">Day</p>
               <div className="flex items-center gap-4">

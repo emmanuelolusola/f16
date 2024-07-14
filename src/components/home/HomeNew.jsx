@@ -9,6 +9,7 @@ const HomeNew = () => {
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [currentTitle, setCurrentTitle] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState(null);
 
   const navigate = useNavigate();
 
@@ -49,11 +50,14 @@ const HomeNew = () => {
     const handleScroll = () => {
       const elements = eventsList.map((item, index) => {
         const element = document.getElementById(item.ID);
-        const rect = element.getBoundingClientRect();
-        return {
-          index,
-          inView: rect.top >= 0 && rect.bottom <= window.innerHeight,
-        };
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            index,
+            inView: rect.top >= 0 && rect.bottom <= window.innerHeight,
+          };
+        }
+        return { index, inView: false };
       });
 
       const inViewElement = elements.find((item) => item.inView);
@@ -74,6 +78,27 @@ const HomeNew = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [eventsList]);
+
+  useEffect(() => {
+    const fetchPaymentStatus = async () => {
+      if (!userID) return;
+
+      try {
+        const response = await fetch(
+          `https://friendsof16api.up.railway.app/api/payments/${userID}`
+        );
+        if (response.status === 200) {
+          setPaymentStatus(true);
+        } else {
+          setPaymentStatus(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPaymentStatus();
+  }, []);
 
   const sortedEventsList = eventsList.sort((a, b) => {
     const aStartDate = new Date(a.StartDate);
@@ -169,7 +194,7 @@ const HomeNew = () => {
             </div>
           ) : (
             sortedEventsList.map((event, index) => {
-              if (event["Members-only"] && !userID) {
+              if (event["Members-only"] && (!userID || !paymentStatus)) {
                 return null;
               }
 

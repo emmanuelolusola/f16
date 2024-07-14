@@ -31,16 +31,10 @@ const Profile = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const today = new Date();
-
-    // if (date.toDateString() === today.toDateString()) {
-    //   return "Today";
-    // }
-
     const day = date.getDate();
     const suffix = getOrdinalSuffix(day);
     const options = { weekday: "long", month: "long", year: "numeric" };
     const formattedDate = date.toLocaleDateString("en-GB", options);
-
     const [weekday, month, year] = formattedDate.split(" ");
     return `${weekday} ${day}, ${month}`;
   };
@@ -63,7 +57,6 @@ const Profile = () => {
             `https://friendsof16api.up.railway.app/api/payments/${userId}`
           );
           if (paymentResponse.status !== 200) {
-            // const paymentData = await paymentResponse.json();
             setPaymentStatus("Inactive");
             setStartDate("");
             setEndDate("");
@@ -83,6 +76,13 @@ const Profile = () => {
 
     fetchUserData();
   }, []);
+
+  const getInitials = (name) => {
+    if (!name) return "";
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]).join("");
+    return initials;
+  };
 
   return (
     <div className="w-full h-[100dvh] py-[10px] lg:py-[20px]">
@@ -124,7 +124,8 @@ const Profile = () => {
           <div className="lg:w-[500px] flex flex-col gap-8">
             <div className="w-full flex justify-between items-start">
               <div className="flex gap-2">
-                <div className="relative w-[52px] h-[52px] bg-[#d9d9d9] rounded-full">
+                <div className="relative w-[52px] h-[52px] bg-[#0a0a0a] rounded-full flex items-center justify-center text-[18px] font-bold text-white">
+                  {getInitials(userData.Name)}
                   {paymentStatus === "Active" ? (
                     <div className="absolute h-[12px] w-[12px] top-1 right-0 bg-[#47CD89] rounded-full"></div>
                   ) : (
@@ -136,12 +137,6 @@ const Profile = () => {
                   <p className="font-normal text-[18px]">{paymentStatus}</p>
                 </div>
               </div>
-              {/* <p
-                className="font-normal text-[18px] cursor-pointer"
-                onClick={() => navigate(`/profile/edit`)}
-              >
-                Edit
-              </p> */}
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex justify-between gap-10">

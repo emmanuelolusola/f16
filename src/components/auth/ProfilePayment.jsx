@@ -16,18 +16,21 @@ const ProfilePayment = () => {
     endDate: "",
   });
 
+  const userID = localStorage.getItem("userID");
+
   useEffect(() => {
     const fetchPaymentDetails = async () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://friendsof16api.up.railway.app/api/payments/recGPohbf08D6Py5l"
+          `https://friendsof16api.up.railway.app/api/payments/${userID}`
         );
         if (response.status !== 200) {
           setActivateButton(true);
         } else {
           setActivateButton(false);
           const data = await response.json();
+          localStorage.setItem("paymentStatus", data.status);
           if (data.status === "success") {
             const {
               Amount,
