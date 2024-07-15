@@ -141,7 +141,7 @@ const Coworking = () => {
   };
 
   return (
-    <div className="w-full h-[100dvh] lg:h-full py-[10px] lg:py-[20px]">
+    <div className="w-full h-full py-[10px] lg:py-[20px]">
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
           className="font-bold text-[18px] cursor-pointer"
@@ -159,7 +159,7 @@ const Coworking = () => {
           Menu
         </p>
       </div>
-      <div className="h-[80px] lg:h-[100px]"></div>
+      <div className="h-[60px] lg:h-[80px]"></div>
       {loader ? (
         <div className="w-full h-[80vh] flex justify-center items-center">
           <div
@@ -170,26 +170,35 @@ const Coworking = () => {
           ></div>
         </div>
       ) : (
-        <div className="h-[85dvh] lg:h-full px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto grid grid-col content-between gap-4 lg:gap-8">
+        <div className="h-full px-[24px] lg:px-0 lg:w-[600px] lg:mx-auto grid grid-col content-between gap-4 lg:gap-8">
           <div className="flex flex-col gap-4">
             <p className="text-[18px] font-bold">Book a Spot</p>
             <img src={image} alt="" className="w-full pb-0" />
             <div className="w-full flex flex-col">
-              <p className="font-normal text-[18px] w-full py-[12px] border-b border-black ">
+              <p className="font-normal text-[18px] w-full py-[10px] border-b border-black ">
                 What's included
               </p>
-              <p className="font-bold text-[18px] w-full py-[12px] border-b border-black ">
+              <p className="font-bold text-[18px] w-full py-[10px] border-b border-black ">
                 Communal seating
               </p>
-              <p className="font-bold text-[18px] w-full py-[12px]">
+              <p className="font-bold text-[18px] w-full py-[10px] border-b border-black ">
                 Extra high stools by the bar
+              </p>
+              <p className="font-bold text-[18px] w-full py-[10px] border-b border-black ">
+                Internet access
+              </p>
+              <p className="font-bold text-[18px] w-full py-[10px] border-b border-black ">
+                The bar
+              </p>
+              <p className="font-bold text-[18px] w-full py-[10px]">
+                Global network of creatives
               </p>
             </div>
           </div>
 
           {!isCoworkingAvailable ? (
             <button
-              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[20px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
               onClick={toggleDrawer}
               disabled
             >
@@ -197,7 +206,7 @@ const Coworking = () => {
             </button>
           ) : (
             <button
-              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[10px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
+              className="w-full h-[66px] bg-[#0a0a0a] text-[#ffffff] text-[18px] font-bold mb-[20px] disabled:bg-[#e1e1e1] disabled:text-[#bebebe]"
               onClick={toggleDrawer}
             >
               Book

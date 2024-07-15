@@ -65,7 +65,8 @@ const MembershipAbout = () => {
           <p className="font-bold text-[18px]">Here’s what to expect:</p>
           <p className="font-normal text-[18px]">
             1. During the week, preferential access (via our dedicated app) to
-            our co-working space, which adapts to your needs throughout the day.
+            our work and play spaces, which adapts to your needs throughout the
+            day.
           </p>
           <p className="font-normal text-[18px]">
             2. On weekends, preferential access to our #OpenWeekend format and
@@ -105,8 +106,8 @@ const MembershipAbout = () => {
         <div className="flex flex-col gap-4">
           <p className="font-bold text-[18px]">RATES</p>
           <p className="font-normal text-[18px]">
-            $250 for one year. <br />
-            $150 for 6 months.
+            $250 (₦400,000) for one year. <br />
+            $150 (₦250,000) for six months.
           </p>
         </div>
         <p className="font-normal text-[18px]">

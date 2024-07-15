@@ -48,7 +48,7 @@ const Membership = () => {
 
       <div className="flex flex-col gap-4 px-[24px] lg:w-[600px] lg:mx-auto lg:px-0 pb-[40px] lg:pb-[50px]">
         <p className="font-normal text-[18px]">
-          Over the years, I’ve built strong friendships and working
+          Over the years, we’ve built strong friendships and working
           relationships with some of Nigeria's most celebrated brands, artists
           and creatives. These friends have guided my decision-making around
           what moves to make and what ideas to incubate.
@@ -59,20 +59,16 @@ const Membership = () => {
           incubator for Nigeria's emerging talent.
         </p>
         <p className="font-normal text-[18px]">
-          In exchange for a patronage fee, our suite of services provide a safe
-          haven to unwind, network and be productive whilst enjoying exceptional
-          amenities tailored exclusively for ‘Friends of 16’.
+          In exchange for a membership fee, our suite of services—work and play
+          spaces, a bespoke hotel and a full service bar—provide a safe haven to
+          unwind, network and be productive in, whilst enjoying amenities
+          tailored exclusively for 'Friends of 16.'
         </p>
         <p className="font-normal text-[18px]">
           I hope you’ll join us as we explore the many potentials that our
-          coming together will bring.
+          coming together will bring. To friendship!
         </p>
-        <p className="font-normal text-[18px]">To friendship!</p>
-        <div className="flex flex-col gap-0 mt-2 mb-4">
-          <p className="font-bold text-[18px]">Tushar Hathiramani</p>
-          <p className="font-normal text-[18px]">Creative Director</p>
-        </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mt-4">
           <div
             className="w-full h-[66px] bg-[#0a0a0a] text-white text-[18px] font-bold flex justify-center items-center cursor-pointer"
             onClick={() => {
