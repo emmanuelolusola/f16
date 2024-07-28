@@ -5,9 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import ScrollToTopOnRouteChange from "./ScrollToTopOnRouteChange";
 import HomeNew from "./components/home/HomeNew";
-import Menu from "./components/menu/Menu";
 import About from "./components/menu/About";
 import Event from "./components/events/Event";
 import Registered from "./components/events/Registered";
@@ -36,7 +36,7 @@ import ProtectedMenu from "./components/auth/ProtectedMenu";
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <Router>
         <ScrollToTopOnRouteChange />
         <Routes>
@@ -161,7 +161,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </>
+    </HelmetProvider>
   );
 }
 
