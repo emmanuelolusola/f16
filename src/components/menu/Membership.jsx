@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 import arrow from "../../assets/chevron-down.svg";
 import img from "../../assets/img1.png";
@@ -13,6 +14,12 @@ const Membership = () => {
 
   return (
     <div className="w-full h-full py-[10px] lg:py-[20px]">
+      <Helmet>
+        <title>Apply Now</title>
+        <meta name="title" content="Apply for Membership" />
+        <meta property="og:title" content="Apply for Membership" />
+        <meta property="twitter:title" content="Apply for Membership" />
+      </Helmet>
       <div className="w-full fixed top-0 flex justify-between items-center py-[15px] lg:pb-0 lg:pt-[30px] px-[24px] lg:px-[96px] bg-white z-10">
         <p
           className="font-bold text-[18px] cursor-pointer"
